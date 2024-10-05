@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
-import { CommonService } from '../../Services/common.service';
-import { Category } from '../../Shared/Category';
+import { Category } from '../../../Shared/Models/Category';
+import { StartupService } from '../startup.service';
 
 @Component({
   selector: 'app-categorylist',
@@ -10,10 +10,10 @@ import { Category } from '../../Shared/Category';
   styleUrl: './categorylist.component.css'
 })
 export class CategorylistComponent {
-  commonService = inject(CommonService);
+  startupService = inject(StartupService);
   categoryList: Category[] = [];
   ngOnInit() {
-    this.commonService.getCategories().subscribe((data) => {
+    this.startupService.getCategories().subscribe((data) => {
       console.log(data);
       this.categoryList = data;
     })

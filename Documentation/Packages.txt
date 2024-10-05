@@ -2,5 +2,4 @@
 2) npx tailwindcss init
 3) npm install @heroicons/react
 4) npm i @popperjs/core
-5) npm i ngx-owl-carousel-o
 

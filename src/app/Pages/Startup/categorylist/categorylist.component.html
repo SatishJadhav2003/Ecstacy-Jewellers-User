@@ -1,0 +1,50 @@
+<!-- <div class="mx-2 w-full px-4 py-8 border-solid border-4 border-gold-500">
+  <h2 class="text-center text-3xl font-bold text-yellow-700 mb-8">
+    SHOP BY CATEGORY
+  </h2>
+
+  <div class="grid grid-cols-2 sm:grid-cols-4 gap-8">
+    @for (item of categoryList; track $index) {
+    <div class="text-center flex flex-col items-center">
+      <img
+        [src]="item.Category_Image"
+        [alt]="item.Category_Name"
+        class="rounded-md shadow-lg h-52"
+      />
+      <p class="mt-4 text-lg font-semibold text-yellow-800">
+        {{ item.Category_Name }}
+      </p>
+    </div>
+    }
+  </div>
+</div> -->
+<!-- <div class="fixed right-0 top-1/4 bg-yellow-700 text-white py-2 px-4 rotate-90 transform origin-top-right">
+    TODAY'S RATE
+  </div> -->
+<div class="mx-3 w-auto py-4 m-4 border-solid border-4 border-gold-500 rounded-3xl">
+  <div class=" border-solid border-2 border-gold-500 rounded-3xl mx-3  py-4">
+    <h2 class="text-center text-2xl font-bold text-gold-500 uppercase mb-8">
+      Shop By Category
+    </h2>
+
+    <div
+      class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-8 px-4 "
+    >
+      @for (item of categoryList; track $index) {
+
+      <div class="bg-white shadow-md rounded-lg overflow-hidden transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 hover:cursor-pointer duration-300">
+        <img
+          [src]="item.Category_Image"
+          [alt]="item.Category_Name"
+          class="w-full h-48 object-contain"
+        />
+        <div class="p-4">
+          <h3 class="text-center text-sm font-medium text-gray-700">
+            {{ item.Category_Name }}
+          </h3>
+        </div>
+      </div>
+      } 
+    </div>
+  </div>
+</div>

@@ -1,27 +1,36 @@
 import { Component, inject } from '@angular/core';
-import { UtilService } from '../../Services/util.service';
-import { CommonService } from '../../Services/common.service';
-import { MnDropdownComponent } from '../../Commponents/dropdown';
-import { Category } from '../../Shared/Category';
+import { UtilService } from '../../../Services/util.service';
+import { MnDropdownComponent } from '../../../Commponents/dropdown';
+import { Category } from '../../../Shared/Models/Category';
+import { CommonModule } from '@angular/common';
+import { StartupService } from '../startup.service';
+import { AuthService } from '../../../Authentication/auth.service';
+import { LoginComponent } from "../../../Authentication/login/login.component";
+import { RegisterComponent } from "../../../Authentication/register/register.component";
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [MnDropdownComponent],
+  imports: [MnDropdownComponent, CommonModule, LoginComponent, RegisterComponent],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })
 export class NavbarComponent {
+
+  // Other
   searchTitles: string[] = ['Rings', 'Bracelets', 'Couple Rings', 'Coins', "Necklace", "Bangles", "Any Jewellery"]
   currentIndex: number = 0;
   currentTitle: string = this.searchTitles[this.currentIndex];
 
   // Import Services
-  util = inject(UtilService)
-  common = inject(CommonService);
+  auth = inject(AuthService);
+  util = inject(UtilService);
+  startupService = inject(StartupService);
   constructor() {
+    this.auth.IsLoggedIn();
     this.rotateSearchPlaceholder();
     this.util.changeTitle("Jeweller's King - Home");
     this.getCategories();
+
   }
 
   rotateSearchPlaceholder() {
@@ -36,21 +45,34 @@ export class NavbarComponent {
 
   // *************************************************Product section start********************************************************//
   Categories: Category[] = [];
-  totalCategories:number = 0;
+  totalCategories: number = 0;
   getCategories() {
-    this.common.getCategories().subscribe((data) => {
+    this.startupService.getCategories().subscribe((data) => {
       if (data) {
         // this.Categories = data;
         // this.totalCategories = this.Categories.length;
       }
-    },err=>{
+    }, err => {
       console.log(err);
     })
   }
   // *************************************************Product section end********************************************************//
+  // *************************************************Account section Start********************************************************//
+  onAccount() {
+    if (this.auth.IsLoggedIn()) {
 
-  ngOnDestoy()
-  {
-    
+    } else {
+
+    }
   }
+  // *************************************************Other section end********************************************************//
+
+  ngOnDestoy() {
+
+  }
+
+  openModal() {
+    this.auth.RegistrationModalOpen.set(true);
+  }
+
 }

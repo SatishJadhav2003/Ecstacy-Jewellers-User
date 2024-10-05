@@ -1,0 +1,214 @@
+<!-- Modal Overlay -->
+
+<div
+  class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50"
+>
+  <!-- Modal Container -->
+  <div
+    class="bg-white rounded-lg shadow-lg w-full max-w-4xl flex flex-col md:flex-row"
+  >
+    <!-- Left Section: Image -->
+    <div
+      class="hidden md:flex md:w-2/3 bg-cover bg-center rounded-l-lg"
+      style="background-image: url('icons/logo.png')"
+    ></div>
+
+    <!-- Right Section: Form with Grayish Background Image -->
+    <div
+      class="relative w-full md:w-3/2 p-8 bg-cover bg-center"
+      style="background-image: url('images/category/neclace.png')"
+    >
+      <div class="absolute inset-0 bg-gray-900 bg-opacity-60"></div>
+     
+      <div class="relative z-10 p-6">
+        <!-- Modal Header -->
+        <div class="flex justify-between items-center border-b pb-3 mb-6">
+          <h2 class="text-3xl font-bold text-white">SIGN UP</h2>
+          <button
+            class="text-white hover:text-gray-700"
+            (click)="authService.RegistrationModalOpen.set(false)"
+          >
+            <svg
+              class="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M6 18L18 6M6 6l12 12"
+              ></path>
+            </svg>
+          </button>
+        </div>
+        @if (!isOTP) {
+        <!-- Modal Body -->
+        <p class="text-white mb-4">
+          Please enter the following details to create your account
+        </p>
+
+        <!-- Form Fields -->
+        <form
+          [formGroup]="signupForm"
+          (ngSubmit)="onSubmit()"
+          class="space-y-4"
+        >
+          <input
+            formControlName="Cust_Name"
+            type="text"
+            placeholder="Full Name"
+            class="w-full px-4 py-3 bg-gray-100 rounded-lg text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+            [ngClass]="getClass('Cust_Name')"
+          />
+
+          <input
+            formControlName="Cust_Mobile"
+            type="text"
+            placeholder="Mobile No."
+            class="w-full px-4 py-3 bg-gray-100 rounded-lg text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+            [ngClass]="getClass('Cust_Mobile')"
+          />
+
+          <input
+            formControlName="Cust_Email"
+            type="email"
+            placeholder="Email Address"
+            class="w-full px-4 py-3 bg-gray-100 rounded-lg text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+            [ngClass]="getClass('Cust_Email')"
+          />
+
+          <!-- Submit Button -->
+          <button
+            type="submit"
+            class="w-full bg-yellow-600 text-white text-lg font-semibold py-3 rounded-lg hover:cursor-pointer"
+            (click)="onSubmit()"
+          >
+            <!-- [disabled]="signupForm.invalid" -->
+            CREATE ACCOUNT
+          </button>
+        </form>
+
+        <!-- Social Sign-in Options -->
+        <div class="flex flex-wrap items-center justify-center mt-4">
+          <span class="text-white text-center underline">Or Continue With</span>
+          <a
+            href="#"
+            class="bg-white p-2 rounded-full hover:cursor-pointer ml-3"
+          >
+            <img src="icons/google.png" alt="Google" class="w-6 h-6" />
+          </a>
+        </div>
+      } @if (isOTP) {
+        <div class="relative z-10">
+          <p class="text-sm text-white mb-6">
+            A verification code is sent to your mobile number. Please enter it
+            below...
+          </p>
+  
+          <form>
+            <!-- Mobile Number Input -->
+            <div class="flex justify-start mb-2">
+              <a href="#" class="text-sm text-white font-bold justify-start"
+                >Mobile No</a
+              >
+            </div>
+            <div class="relative w-full mb-4">
+              <input
+                disabled
+                type="text"
+                placeholder="Mobile No."
+                class="w-full p-3 rounded-lg bg-gray-200 text-dark placeholder-gray-400 pr-16"
+              />
+              <span class="font-bold absolute right-3 top-1/2 transform -translate-y-1/2  text-gold-700 py-1  rounded-lg hover:text-green-500 hover:cursor-pointer" (click)="isOTP =!isOTP">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125" />
+                </svg>
+                
+              </span>
+            </div>
+            
+            <!-- Resend Link -->
+            <div class="flex justify-end mb-4">
+              <a href="#" class="text-sm text-yellow-400 justify-end">Resend</a>
+            </div>
+  
+            <div class="flex justify-start mb-2">
+              <a href="#" class="text-sm text-white font-bold justify-start"
+                >Enter Verification Code</a
+              >
+            </div>
+  
+            <!-- Verification Code Input -->
+            <div class="mb-6 flex space-x-2 justify-between">
+              <input
+                (keyup.enter)="focusNext('#two')"
+                type="text"
+                maxlength="1"
+                class="w-12 h-12 p-2 rounded-lg bg-gray-100 text-dark text-center"
+              />
+              <input
+                (keyup.enter)="focusNext('#three')"
+                id="two"
+                type="text"
+                maxlength="1"
+                class="w-12 h-12 p-2 rounded-lg bg-gray-100 text-dark text-center"
+              />
+              <input
+                (keyup.enter)="focusNext('#four')"
+                id="three"
+                type="text"
+                maxlength="1"
+                class="w-12 h-12 p-2 rounded-lg bg-gray-100 text-dark text-center"
+              />
+              <input
+                (keyup.enter)="focusNext('#five')"
+                id="four"
+                type="text"
+                maxlength="1"
+                class="w-12 h-12 p-2 rounded-lg bg-gray-100 text-dark text-center"
+              />
+              <input
+                (keyup.enter)="focusNext('#six')"
+                id="five"
+                type="text"
+                maxlength="1"
+                class="w-12 h-12 p-2 rounded-lg bg-gray-100 text-dark text-center"
+              />
+              <input
+                (keyup.enter)="focusNext('#enter')"
+                id="six"
+                type="text"
+                maxlength="1"
+                class="w-12 h-12 p-2 rounded-lg bg-gray-100 text-dark text-center"
+              />
+            </div>
+  
+            <!-- Verify Button -->
+            <div>
+              <button
+                type="button"
+                class="w-full py-3 rounded-lg bg-yellow-500 text-white font-semibold hover:bg-yellow-600 transition duration-300"
+              >
+                Verify
+              </button>
+            </div>
+          </form>
+          <!-- Social Sign-in Options -->
+        </div>
+        }
+        <div
+          class="flex flex-wrap items-center justify-center mt-4 border-t pt-3 hover:cursor-pointer"
+          (click)="onLogin()"
+        >
+          <span class="text-white w-full text-center underline"
+            >Alredy have an account login here</span
+          >
+        </div>
+      </div>
+     
+    </div>
+  </div>
+</div>
