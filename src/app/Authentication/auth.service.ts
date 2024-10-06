@@ -8,7 +8,7 @@ import { ApiRequestService } from '../Services/api-request.service';
 })
 export class AuthService {
   IsLoggedIn: WritableSignal<boolean> = signal(false);
-  RegistrationModalOpen: WritableSignal<boolean> = signal(true);
+  RegistrationModalOpen: WritableSignal<boolean> = signal(false);
   LoginModalOpen: WritableSignal<boolean> = signal(false);
 
   apiRequest = inject(ApiRequestService);

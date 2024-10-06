@@ -29,6 +29,10 @@ export class RegisterComponent {
       ],
       Cust_Email: ['', [Validators.required, Validators.email]],
     });
+
+    setTimeout(() => {
+      this.focusNext('#name');
+    }, 500);
   }
 
   onSubmit() {
@@ -39,7 +43,9 @@ export class RegisterComponent {
       // })
     }
     this.isOTP = true;
-    console.log(this.isOTP);
+    setTimeout(() => {
+      this.focusNext('#one')
+    }, 500);
   }
 
   getClass(name: string) {
@@ -55,6 +61,7 @@ export class RegisterComponent {
   onLogin() {
     this.authService.LoginModalOpen.set(true);
     this.authService.RegistrationModalOpen.set(false);
+
   }
 
   focusNext(next: any) {

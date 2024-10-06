@@ -17,28 +17,33 @@ import { AuthService } from '../auth.service';
 })
 export class LoginComponent {
   signupForm!: FormGroup;
+  isOTP: boolean = false;
   authService = inject(AuthService);
   constructor(private fb: FormBuilder) {}
 
   ngOnInit() {
     this.signupForm = this.fb.group({
-      Cust_Name: ['', Validators.required],
       Cust_Mobile: [
         '',
         [Validators.required, Validators.pattern(/^(7|8|9)\d{9}$/)],
       ],
-      Cust_Email: ['', [Validators.required, Validators.email]],
     });
+    setTimeout(() => {
+      this.focusNext('#mobile');
+    }, 500);
   }
 
   onSubmit() {
     if (this.signupForm.valid) {
-      // Handle form submission
       console.log(this.signupForm.value);
-      this.authService.saveCustomer(this.signupForm.value).subscribe((data) => {
-        console.log(data);
-      });
+      // this.authService.saveCustomer(this.signupForm.value).subscribe((data) => {
+      //   console.log(data);
+      // })
     }
+    this.isOTP = true;
+    setTimeout(() => {
+      this.focusNext('#one');
+    }, 500);
   }
 
   getClass(name: string) {
@@ -51,18 +56,16 @@ export class LoginComponent {
     return '';
   }
 
-  onLogin() {
-    this.authService.LoginModalOpen.set(true);
-    this.authService.RegistrationModalOpen.set(false);
+  onRegistration() {
+    this.authService.RegistrationModalOpen.set(true);
+    this.authService.LoginModalOpen.set(false);
   }
-
+  resendOTP() {}
   focusNext(next: any) {
     if (next) {
       document.querySelector(next).focus();
-    }else
-    {
-      if(next=='enter')
-      {
+    } else {
+      if (next == 'enter') {
         this.onSubmit();
       }
     }

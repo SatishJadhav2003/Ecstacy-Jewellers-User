@@ -72,7 +72,8 @@ export class NavbarComponent {
   }
 
   openModal() {
-    this.auth.RegistrationModalOpen.set(true);
+    this.auth.LoginModalOpen.set(true);
+    this.auth.RegistrationModalOpen.set(false);
   }
 
 }
