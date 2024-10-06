@@ -7,6 +7,7 @@ import { StartupService } from '../startup.service';
 import { AuthService } from '../../../Authentication/auth.service';
 import { LoginComponent } from "../../../Authentication/login/login.component";
 import { RegisterComponent } from "../../../Authentication/register/register.component";
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-navbar',
   standalone: true,
@@ -25,6 +26,7 @@ export class NavbarComponent {
   auth = inject(AuthService);
   util = inject(UtilService);
   startupService = inject(StartupService);
+  router = inject(Router);
   constructor() {
     this.auth.IsLoggedIn();
     this.rotateSearchPlaceholder();
@@ -74,6 +76,11 @@ export class NavbarComponent {
   openModal() {
     this.auth.LoginModalOpen.set(true);
     this.auth.RegistrationModalOpen.set(false);
+  }
+
+  navigateHome()
+  {
+    this.router.navigate([''])
   }
 
 }

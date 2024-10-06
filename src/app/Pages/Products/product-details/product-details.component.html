@@ -1,0 +1,17 @@
+<div class="grid grid-cols-5 gap-4 p-5">
+  <div class="col-span-2 flex flex-row">
+    <div class="w-1/5 fle flex-column space-y-2">
+      @for (item of imagesList; track $index) {
+      <img (click)="currentImage = $index" class="h-16 w-16 object-contain hover:cursor-pointer" [src]="item" alt="" />
+      }
+    </div>
+    <div class="w-4/5">
+      <img class="w-full object-contain" [src]="imagesList[currentImage]" alt="" />
+    </div>
+  </div>
+  <div class="col-span-3">
+    <div class="bg-white shadow-md rounded-lg overflow-hidden p-4">
+        <h2 class="text-gold-500 font-bold">{{'Necklace with brand'| uppercase}}</h2>
+      </div>
+  </div>
+</div>

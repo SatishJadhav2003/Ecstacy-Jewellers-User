@@ -30,9 +30,9 @@
     <div
       class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-8 px-4 "
     >
-      @for (item of categoryList; track $index) {
+      @for (item of categoryList; track item.Category_ID) {
 
-      <div class="bg-white shadow-md rounded-lg overflow-hidden transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 hover:cursor-pointer duration-300">
+      <div (click)="onCategory(item)" class="bg-white shadow-md rounded-lg overflow-hidden transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 hover:cursor-pointer duration-300">
         <img
           [src]="item.Category_Image"
           [alt]="item.Category_Name"
