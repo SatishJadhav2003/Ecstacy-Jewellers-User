@@ -17,4 +17,5 @@ export class ProductDetailsComponent {
   ];
 
   currentImage:number=0;
+  inCart:boolean=false
 }

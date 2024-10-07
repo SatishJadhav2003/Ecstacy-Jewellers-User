@@ -22,6 +22,6 @@ export class CategorylistComponent {
   }
 
   onCategory(category:Category) {
-    this.router.navigate(['product-list']);
+    this.router.navigate(['product-list/'+category.Category_ID]);
   }
 }
