@@ -6,8 +6,8 @@
   </div>
 </div>
 
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 2xl:grid-cols-5 gap-6 p-6 justify-items-center">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 2xl:grid-cols-5 p-6 justify-items-center">
   @for (item of productList; track $index) {
-  <app-product-card />
+  <app-product-card [productData]="item" />
   }
 </div>

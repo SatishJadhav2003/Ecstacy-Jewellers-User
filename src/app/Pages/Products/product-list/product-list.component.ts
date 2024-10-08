@@ -1,23 +1,28 @@
 import { Component, inject } from '@angular/core';
-import { ProductCardComponent } from "../product-card/product-card.component";
+import { ProductCardComponent } from '../product-card/product-card.component';
 import { ActivatedRoute } from '@angular/router';
+import { ProductService } from '../product.service';
+import { Product } from '../../../Shared/Models/product.model';
 
 @Component({
   selector: 'app-product-list',
   standalone: true,
   imports: [ProductCardComponent],
   templateUrl: './product-list.component.html',
-  styleUrl: './product-list.component.css'
+  styleUrl: './product-list.component.css',
 })
 export class ProductListComponent {
-productList:any[]=[1,2,3,4,5,6,7,8];
+  productList: Product[] = [];
 
-route = inject(ActivatedRoute);
-cateID!:any;
-ngOnInit()
-{
-  this.cateID = this.route.snapshot.paramMap.get("CateID");
-  console.log(this.cateID)
-
-}
+  route = inject(ActivatedRoute);
+  cateID!: any;
+  readonly productService = inject(ProductService);
+  ngOnInit() {
+    this.cateID = this.route.snapshot.paramMap.get('CateID');
+    console.log(this.cateID);
+    this.productService.getProductsList(this.cateID).subscribe((data) => {
+      
+      this.productList = data;
+    });
+  }
 }
