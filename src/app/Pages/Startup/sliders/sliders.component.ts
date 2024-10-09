@@ -2,11 +2,11 @@ import { Component, inject, signal, WritableSignal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Banner } from './banner.model';
 import { StartupService } from '../startup.service';
-
+import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 @Component({
   selector: 'app-sliders',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,CarouselModule],
   templateUrl: './sliders.component.html',
   styleUrl: './sliders.component.css'
 })
@@ -42,6 +42,27 @@ export class SlidersComponent {
     return this.banner[this.index]?.Banner_Image;
   }
 
+  limit: number = 10; // <==== Edit this number to limit API results
+  customOptions: OwlOptions = {
+    loop: true,
+    autoplay: true,
+    center: true,
+    dots: false,
+    autoHeight: false,
+    autoWidth: true,
+    fluidSpeed:true,
+    responsive: {
+      0: {
+        items: 1,
+      },
+      600: {
+        items: 1,
+      },
+      1000: {
+        items: 1,
+      }
+    }
+  }
 
 
 }
