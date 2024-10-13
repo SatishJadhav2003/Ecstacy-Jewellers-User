@@ -60,11 +60,12 @@
     <ng-container *ngFor="let slide of banner">
       <ng-template class="slide" carouselSlide>
         <img
+        class="w-screen h-screen"
           [src]="slide.Banner_Image"
           [alt]="slide.Banner_Name"
           [title]="slide.Banner_Name"
         />
       </ng-template>
-    </ng-container>
+    </ng-container> 
   </owl-carousel-o>
 </div>

@@ -34,7 +34,7 @@ export class ProductCardComponent {
   onProduct() {
     this.router.navigate(['product-details']);
   }
-  addToWishlist() {
+  wishListChange() {
     this.inCart = !this.inCart;
   }
 }
