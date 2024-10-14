@@ -26,20 +26,37 @@
       <h2 class="text-xl font-bold text-yellow-800 flex justify-between">
         EXQUISITE GOLD NECKLACE SET
         <span class="flex">
-          <svg  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" [ngClass]="inCart ? 'fill-gold-700':'stroke-gold-500 '" class="h-8 w-8 stroke-[1.5] fill-transparent hover:fill-gold-700 cursor-pointer transition-all duration-300 mr-3">
-            <path d="m11.645 20.91-.007-.003-.022-.012a15.247 15.247 0 0 1-.383-.218 25.18 25.18 0 0 1-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0 1 12 5.052 5.5 5.5 0 0 1 16.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 0 1-4.244 3.17 15.247 15.247 0 0 1-.383.219l-.022.012-.007.004-.003.001a.752.752 0 0 1-.704 0l-.003-.001Z" />
+          <svg (click)="inCart = !inCart"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            [ngClass]="inCart ? 'fill-gold-700' : 'fill-transparent'"
+            class="h-8 w-8 stroke-gold-500 stroke-[1.5] hover:fill-gold-700 cursor-pointer transition-all duration-300"
+          >
+            <path
+              d="m11.645 20.91-.007-.003-.022-.012a15.247 15.247 0 0 1-.383-.218 25.18 25.18 0 0 1-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0 1 12 5.052 5.5 5.5 0 0 1 16.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 0 1-4.244 3.17 15.247 15.247 0 0 1-.383.219l-.022.012-.007.004-.003.001a.752.752 0 0 1-.704 0l-.003-.001Z"
+            />
           </svg>
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6" class="h-8 w-8 stroke-[1.5]  fill-gold-500 cursor-pointer transition-all duration-300">
-            <path fill-rule="evenodd" d="M15.75 4.5a3 3 0 1 1 .825 2.066l-8.421 4.679a3.002 3.002 0 0 1 0 1.51l8.421 4.679a3 3 0 1 1-.729 1.31l-8.421-4.678a3 3 0 1 1 0-4.132l8.421-4.679a3 3 0 0 1-.096-.755Z" clip-rule="evenodd" />
-          </svg>          
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            class="size-6"
+            class="h-8 w-8 stroke-[1.5] fill-gold-500 cursor-pointer transition-all duration-300"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M15.75 4.5a3 3 0 1 1 .825 2.066l-8.421 4.679a3.002 3.002 0 0 1 0 1.51l8.421 4.679a3 3 0 1 1-.729 1.31l-8.421-4.678a3 3 0 1 1 0-4.132l8.421-4.679a3 3 0 0 1-.096-.755Z"
+              clip-rule="evenodd"
+            />
+          </svg>
         </span>
       </h2>
-     
+
       <p class="text-sm text-gray-600 mt-2">
         Floral Necklace And Earrings Set With Colored Stones Crafted In 22 Karat
-        Yellow Gold Floral Necklace And Earrings Set With Colored Stones Crafted In 22 Karat
-        Yellow GoldFloral Necklace And Earrings Set With Colored Stones Crafted In 22 Karat
-        Yellow Gold
+        Yellow Gold Floral Necklace And Earrings Set With Colored Stones Crafted
+        In 22 Karat Yellow GoldFloral Necklace And Earrings Set With Colored
+        Stones Crafted In 22 Karat Yellow Gold
       </p>
       <div class="mt-4 text-red-600 text-2xl font-semibold">
         Price ₹ 2,52,000/-

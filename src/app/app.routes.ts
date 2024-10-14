@@ -14,7 +14,7 @@ export const routes: Routes = [
         path:'product-list/:CateID',component:ProductListComponent
     },
     {
-        path:'product-details',component:ProductDetailsComponent
+        path:'product-details/:ProdID',component:ProductDetailsComponent
     }
 ];
  

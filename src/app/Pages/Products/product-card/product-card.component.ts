@@ -32,7 +32,7 @@ export class ProductCardComponent {
   inCart: boolean = false;
   router = inject(Router);
   onProduct() {
-    this.router.navigate(['product-details']);
+    this.router.navigate(['product-details/'+this.productData.Product_ID]);
   }
   wishListChange() {
     this.inCart = !this.inCart;

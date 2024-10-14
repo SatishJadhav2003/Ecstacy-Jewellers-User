@@ -18,6 +18,7 @@ export class ProductListComponent {
   cateID!: any;
   readonly productService = inject(ProductService);
   ngOnInit() {
+    window.scrollTo(0, 200)
     this.cateID = this.route.snapshot.paramMap.get('CateID');
     console.log(this.cateID);
     this.productService.getProductsList(this.cateID).subscribe((data) => {
