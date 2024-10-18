@@ -1,5 +1,5 @@
 <div
-  class="max-w-sm bg-white rounded-2xl shadow-lg overflow-hidden m-4 relative hover:cursor-pointer hover:border-2 hover:border-yellow-500 hover:scale-105 transition transform duration-300"
+  class="max-w-sm bg-white rounded-2xl shadow-lg overflow-hidden m-2 relative hover:cursor-pointer hover:border-2 hover:border-yellow-500 hover:scale-105 transition transform duration-300"
 >
   <!-- Wishlist Icon -->
   <div class="absolute top-2 right-2" (click)="wishListChange()">
@@ -17,14 +17,14 @@
   @if (productData.Product_Image) {
   <img
     (click)="onProduct()"
-    class="w-full h-80 object-contain"
+    class="w-full h-auto min-h-64 object-contain"
     [src]="productData.Product_Image"
     [alt]="productData.Product_Name"
   />
   } @else {
   <img
     (click)="onProduct()"
-    class="w-full h-80 object-contain"
+    class="w-full h-auto min-h-64 object-contain"
     src="https://via.placeholder.com/200"
   />
   }
