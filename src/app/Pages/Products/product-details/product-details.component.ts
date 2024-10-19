@@ -1,5 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { Product } from '../../../Shared/Models/product.model';
+import { ActivatedRoute } from '@angular/router';
+import { ProductService } from '../product.service';
 
 @Component({
   selector: 'app-product-details',
@@ -16,6 +19,21 @@ export class ProductDetailsComponent {
     'images/category/Rings.jpg',
   ];
 
-  currentImage:number=0;
-  inCart:boolean=false
+  currentImage: number = 0;
+  inCart: boolean = false;
+
+  product: Product[] =[];
+
+  route = inject(ActivatedRoute);
+  ProdID!: any;
+  readonly productService = inject(ProductService);
+  ngOnInit() {
+    window.scrollTo(0, 200);
+    this.ProdID = this.route.snapshot.paramMap.get('ProdID');
+    console.log(this.ProdID);
+    this.productService.getProduct(this.ProdID).subscribe((data) => {
+      this.product = data;
+      console.log(this.product);
+    });
+  }
 }

@@ -11,6 +11,12 @@ export class ProductService {
   constructor() {}
 
   getProductsList(Category_ID: any): Observable<Product[]> {
-    return this.apiService.get('api/product/' + Category_ID);
+    return this.apiService.get('api/product/ByCatgory/' + Category_ID);
+  }
+
+  getProduct(Product_ID:any):Observable<Product[]>
+  {
+    return this.apiService.get('api/product/' + Product_ID);
+
   }
 }

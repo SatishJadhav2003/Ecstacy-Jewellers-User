@@ -1,18 +1,19 @@
 export class Product {
   Product_ID!: number;
-  Product_Name!: string;
-  Product_Image!: string;
-  Product_Desc!: string;
-  Caret!: number;
-  Weight!: number;
-  Rating!: number;
-  Price!: number;
-  Making_Charges!: number;
-  Other_Charges!: number;
-  Category_ID!: number;
-  Is_Active!: boolean;
-  Is_Edited!: boolean;
-  Is_Deleted!: boolean;
-  Inserted_Date!: any;
-  Updated_Date!: any;
+  Product_Name?: string;
+  Description?: string;
+  Category_ID?: number;
+  Price?: number;
+  Stock_Quantity?: number;
+  Weight?: number;
+  Product_Image?: string;
+  Is_Active?: boolean;
+  Date_Added?: Date;
+  Updated_Date?: Date;
+
+  // Dimesion 
+  Dimension_ID?: number;
+  Title?:string;
+  Dim_Desc?:string;
+
 }

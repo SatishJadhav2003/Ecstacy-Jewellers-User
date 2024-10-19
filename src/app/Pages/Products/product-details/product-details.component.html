@@ -24,18 +24,19 @@
       </div> -->
     <div class="bg-white rounded-lg shadow-lg p-6 w-full mx-auto">
       <h2 class="text-xl font-bold text-yellow-800 flex justify-between">
-        EXQUISITE GOLD NECKLACE SET
+        {{ product[0]?.Product_Name }}
         <span class="flex">
-          <svg (click)="inCart = !inCart"
+          <svg
+            (click)="inCart = !inCart"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
             [ngClass]="inCart ? 'fill-gold-700' : 'fill-transparent'"
-            class="h-8 w-8 stroke-gold-500 stroke-[1.5] hover:fill-gold-700 cursor-pointer transition-all duration-300"
+            class="h-8 w-8 mr-3 stroke-gold-500 stroke-[1.5] hover:fill-gold-700 cursor-pointer transition-all duration-300"
           >
             <path
               d="m11.645 20.91-.007-.003-.022-.012a15.247 15.247 0 0 1-.383-.218 25.18 25.18 0 0 1-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0 1 12 5.052 5.5 5.5 0 0 1 16.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 0 1-4.244 3.17 15.247 15.247 0 0 1-.383.219l-.022.012-.007.004-.003.001a.752.752 0 0 1-.704 0l-.003-.001Z"
             />
-          </svg>
+          </svg> 
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
@@ -52,14 +53,11 @@
         </span>
       </h2>
 
-      <p class="text-sm text-gray-600 mt-2">
-        Floral Necklace And Earrings Set With Colored Stones Crafted In 22 Karat
-        Yellow Gold Floral Necklace And Earrings Set With Colored Stones Crafted
-        In 22 Karat Yellow GoldFloral Necklace And Earrings Set With Colored
-        Stones Crafted In 22 Karat Yellow Gold
+      <p class="text-sm text-gray-600 mt-2 pr-12">
+        {{ product[0]?.Description }}
       </p>
       <div class="mt-4 text-red-600 text-2xl font-semibold">
-        Price ₹ 2,52,000/-
+        {{ product[0]?.Price | currency : "INR" : "symbol-narrow" : "4.2-2" }}
       </div>
       <div class="flex items-center mt-2 text-xs">
         <span class="p-1 bg-green-500 rounded-md mr-2 text-white font-bold"
@@ -72,22 +70,15 @@
         >
       </div>
 
-      <div class="flex justify-between mt-6 text-sm">
-        <div class="text-center">
-          <span class="font-semibold">Yellow Gold</span><br />
-          22 Karat (25.373 gm)<br />
-          (₹ 1,50,000/-)
-        </div>
-        <div class="text-center">
-          <span class="font-semibold">Diamond IJ SI</span><br />
-          0.010ct<br />
-          (₹ 62,000/-)
-        </div>
-        <div class="text-center">
-          <span class="font-semibold">Making Charges</span><br />
-          (₹ 40,000/-)
-        </div>
-        <div class="text-center">
+      <div class="flex justify-around mt-6 text-sm">
+        @for (item of product; track $index) {
+          <div class="text-center">
+            <span class="font-semibold">{{item.Title}}</span><br />
+            {{item.Dim_Desc}}
+          </div>
+        }
+        
+        <!-- <div class="text-center">
           <span class="font-semibold">Qty</span><br />
           <div class="flex items-center pt-2">
             <button
@@ -102,7 +93,7 @@
               +
             </button>
           </div>
-        </div>
+        </div> -->
       </div>
 
       <!-- <div class="grid grid-cols-2 gap-4 mt-6">
