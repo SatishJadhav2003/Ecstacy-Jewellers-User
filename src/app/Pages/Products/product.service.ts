@@ -3,6 +3,7 @@ import { ApiRequestService } from '../../Services/api-request.service';
 import { Observable } from 'rxjs';
 import { Product } from '../../Shared/Models/product.model';
 import { Product_Images } from '../../Shared/Models/ProductImages';
+import { Cart } from '../../Shared/Models/Cart';
 
 @Injectable({
   providedIn: 'root',
@@ -23,5 +24,10 @@ export class ProductService {
   getProductImages(Product_ID:any):Observable<Product_Images[]>
   {
     return this.apiService.get('api/productimages/' + Product_ID);
+  }
+
+  addToCart(data:Cart)
+  {
+    return this.apiService.post('api/cart' ,data);
   }
 }

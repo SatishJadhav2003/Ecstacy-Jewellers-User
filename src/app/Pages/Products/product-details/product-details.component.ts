@@ -6,6 +6,7 @@ import { ProductService } from '../product.service';
 import { Product_Images } from '../../../Shared/Models/ProductImages';
 import { ToastrService } from 'ngx-toastr';
 import { UtilService } from '../../../Services/util.service';
+import { Cart } from '../../../Shared/Models/Cart';
 
 @Component({
   selector: 'app-product-details',
@@ -24,6 +25,7 @@ export class ProductDetailsComponent {
   route = inject(ActivatedRoute);
   readonly productService = inject(ProductService);
   readonly util = inject(UtilService);
+
   ngOnInit() {
     window.scrollTo(0, 0);
     this.ProdID = this.route.snapshot.paramMap.get('ProdID');
@@ -39,15 +41,23 @@ export class ProductDetailsComponent {
   }
 
   addToCart() {
-    if(this.inCart)
-    {
+    if (this.inCart) {
       this.util.error('Removed from cart');
       this.inCart = false;
-    }else
-    {
-      this.util.success('Added To Cart');
-      this.inCart = true;
-
+    } else {
+      const cartData:Cart = {
+        Cart_ID: 0,
+        Product_ID: this.ProdID,
+        User_ID: parseInt(localStorage.getItem('User_ID')),
+        Quantity: 1
+      }
+      console.log(cartData);
+      
+      this.productService.addToCart(cartData).subscribe((data) => {
+        console.log(data);
+        this.util.success('Added To Cart');
+        this.inCart = true;
+      });
     }
   }
 }
