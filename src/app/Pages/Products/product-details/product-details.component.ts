@@ -3,6 +3,9 @@ import { Component, inject } from '@angular/core';
 import { Product } from '../../../Shared/Models/product.model';
 import { ActivatedRoute } from '@angular/router';
 import { ProductService } from '../product.service';
+import { Product_Images } from '../../../Shared/Models/ProductImages';
+import { ToastrService } from 'ngx-toastr';
+import { UtilService } from '../../../Services/util.service';
 
 @Component({
   selector: 'app-product-details',
@@ -12,28 +15,39 @@ import { ProductService } from '../product.service';
   styleUrl: './product-details.component.css',
 })
 export class ProductDetailsComponent {
-  imagesList: string[] = [
-    'images/category/braclet.png',
-    'images/category/neclace.png',
-    'images/category/nosering.webp',
-    'images/category/Rings.jpg',
-  ];
-
+  imagesList: Product_Images[] = [];
   currentImage: number = 0;
   inCart: boolean = false;
-
-  product: Product[] =[];
+  product: Product[] = [];
+  ProdID!: any;
 
   route = inject(ActivatedRoute);
-  ProdID!: any;
   readonly productService = inject(ProductService);
+  readonly util = inject(UtilService);
   ngOnInit() {
-    window.scrollTo(0, 200);
+    window.scrollTo(0, 0);
     this.ProdID = this.route.snapshot.paramMap.get('ProdID');
     console.log(this.ProdID);
     this.productService.getProduct(this.ProdID).subscribe((data) => {
       this.product = data;
       console.log(this.product);
     });
+    this.productService.getProductImages(this.ProdID).subscribe((data) => {
+      console.log(data);
+      this.imagesList = data;
+    });
+  }
+
+  addToCart() {
+    if(this.inCart)
+    {
+      this.util.error('Removed from cart');
+      this.inCart = false;
+    }else
+    {
+      this.util.success('Added To Cart');
+      this.inCart = true;
+
+    }
   }
 }

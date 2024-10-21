@@ -4,8 +4,9 @@
       @for (item of imagesList; track $index) {
       <img
         (click)="currentImage = $index"
-        class="h-16 w-16 object-contain hover:cursor-pointer"
-        [src]="item"
+        class="border-2  border-gold-400 h-16 w-full object-contain hover:cursor-pointer"
+        [src]="item.Image_URL"
+        [ngClass]="currentImage==$index ?'border-solid border-gold-400':'border-dotted'"
         alt=""
       />
       }
@@ -13,7 +14,7 @@
     <div class="w-4/5">
       <img
         class="w-full object-contain"
-        [src]="imagesList[currentImage]"
+        [src]="imagesList[currentImage].Image_URL"
         alt=""
       />
     </div>
@@ -130,9 +131,10 @@
 
       <div class="grid grid-cols-2 gap-4 mt-6">
         <button
+        (click)="addToCart()"
           class="border-yellow-500 border-2 text-yellow-500 font-semibold py-2 rounded-lg hover:bg-yellow-600 hover:text-white"
         >
-          ADD TO CART
+          {{inCart?'GO':'ADD'}} TO CART
         </button>
         <button
           class="bg-yellow-500 text-white font-semibold py-2 rounded-lg hover:bg-gold-700"

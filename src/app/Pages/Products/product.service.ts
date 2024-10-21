@@ -2,6 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { ApiRequestService } from '../../Services/api-request.service';
 import { Observable } from 'rxjs';
 import { Product } from '../../Shared/Models/product.model';
+import { Product_Images } from '../../Shared/Models/ProductImages';
 
 @Injectable({
   providedIn: 'root',
@@ -17,6 +18,10 @@ export class ProductService {
   getProduct(Product_ID:any):Observable<Product[]>
   {
     return this.apiService.get('api/product/' + Product_ID);
+  }
 
+  getProductImages(Product_ID:any):Observable<Product_Images[]>
+  {
+    return this.apiService.get('api/productimages/' + Product_ID);
   }
 }
