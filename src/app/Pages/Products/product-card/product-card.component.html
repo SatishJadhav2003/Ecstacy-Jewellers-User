@@ -2,11 +2,11 @@
   class="max-w-sm bg-white rounded-2xl shadow-lg overflow-hidden m-2 relative hover:cursor-pointer hover:border-2 hover:border-yellow-500 hover:scale-105 transition transform duration-300"
 >
   <!-- Wishlist Icon -->
-  <div class="absolute top-2 right-2" (click)="wishListChange()">
+  <div class="absolute top-2 right-2" (click)="removeWishlistItem()">
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
-      [ngClass]="inCart ? 'fill-gold-700' : 'fill-transparent'"
+      [ngClass]="inWishlist ? 'fill-gold-700' : 'fill-transparent'"
       class="h-8 w-8 stroke-gold-500 stroke-[1.5] hover:fill-gold-700 cursor-pointer transition-all duration-300"
     >
       <path

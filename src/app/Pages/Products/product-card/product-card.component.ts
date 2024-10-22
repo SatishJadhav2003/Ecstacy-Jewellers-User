@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, inject, } from '@angular/core';
+import { Component, EventEmitter, Input, Output, inject, } from '@angular/core';
 import { Router } from '@angular/router';
 import { Product } from '../../../Shared/Models/product.model';
+import { CommonService } from '../../../Services/common.service';
 
 @Component({
   selector: 'app-product-card',
@@ -26,12 +27,20 @@ export class ProductCardComponent {
     Dim_Desc: '',
     Dimension_ID: 0
   };
-  inCart: boolean = false;
+  inWishlist: boolean = false;
+  @Output() removeItem = new EventEmitter<number>();
   router = inject(Router);
+  common = inject(CommonService);
+  ngOnInit()
+  {
+    this.inWishlist = this.common.IsInWishlist(this.productData.Product_ID) ? true : false;
+  }
   onProduct() {
     this.router.navigate(['product-details/'+this.productData.Product_ID]);
   }
-  wishListChange() {
-    this.inCart = !this.inCart;
+
+  removeWishlistItem() {
+    // this.inWishlist = !this.inWishlist;
+    this.removeItem.emit(this.productData.Product_ID);
   }
 }

@@ -1,12 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { Product } from '../../../Shared/Models/product.model';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from '../product.service';
 import { Product_Images } from '../../../Shared/Models/ProductImages';
 import { ToastrService } from 'ngx-toastr';
 import { UtilService } from '../../../Services/util.service';
 import { Cart } from '../../../Shared/Models/Cart';
+import { CommonService } from '../../../Services/common.service';
 
 @Component({
   selector: 'app-product-details',
@@ -23,40 +24,50 @@ export class ProductDetailsComponent {
   ProdID!: any;
 
   route = inject(ActivatedRoute);
+  router = inject(Router);
   readonly productService = inject(ProductService);
+  readonly common = inject(CommonService);
   readonly util = inject(UtilService);
 
   ngOnInit() {
     window.scrollTo(0, 0);
     this.ProdID = this.route.snapshot.paramMap.get('ProdID');
     console.log(this.ProdID);
+
+    // Check wheather product is present in cart or not
+    this.inCart = this.common.IsInCart(this.ProdID) ? true : false;
+
+    console.log(this.inCart);
+
     this.productService.getProduct(this.ProdID).subscribe((data) => {
       this.product = data;
-      console.log(this.product);
     });
     this.productService.getProductImages(this.ProdID).subscribe((data) => {
-      console.log(data);
       this.imagesList = data;
     });
   }
 
   addToCart() {
     if (this.inCart) {
-      this.util.error('Removed from cart');
-      this.inCart = false;
+      this.router.navigate(['user/cart']);
     } else {
-      const cartData:Cart = {
+      const cartData: Cart = {
         Cart_ID: 0,
         Product_ID: this.ProdID,
         User_ID: parseInt(localStorage.getItem('User_ID')),
-        Quantity: 1
-      }
-      console.log(cartData);
-      
+        Quantity: 1,
+      };
+
       this.productService.addToCart(cartData).subscribe((data) => {
-        console.log(data);
-        this.util.success('Added To Cart');
-        this.inCart = true;
+        if (data) {
+          this.util.success(this.product[0].Product_Name + ' Added To Cart');
+          this.inCart = true;
+          this.productService.getUserCartItems().subscribe((res) => {
+            if (res) {
+              localStorage.setItem('CartItems', JSON.stringify(res));
+            }
+          });
+        }
       });
     }
   }

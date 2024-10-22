@@ -20,7 +20,7 @@ export class UtilService {
   {
     this._toastr.success(message,'',{
       timeOut: time?time:1500,
-      positionClass:'toast-bottom-right',
+      positionClass:'toast-bottom-center',
       
     })
   }
@@ -29,7 +29,7 @@ export class UtilService {
   {
     this._toastr.error(message,'',{
       timeOut: time?time:1500,
-      positionClass:'toast-bottom-right',
+      positionClass:'toast-bottom-center',
       
     })
   }
