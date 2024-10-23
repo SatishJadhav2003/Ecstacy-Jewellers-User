@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { UtilService } from '../../../Services/util.service';
-import { MnDropdownComponent } from '../../../Commponents/dropdown';
+import { MnDropdownComponent } from '../../../Components/dropdown';
 import { Category } from '../../../Shared/Models/Category';
 import { CommonModule } from '@angular/common';
 import { StartupService } from '../startup.service';
@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
   imports: [MnDropdownComponent, CommonModule, LoginComponent, RegisterComponent],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
-})
+}) 
 export class NavbarComponent {
 
   // Other

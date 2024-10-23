@@ -4,16 +4,16 @@ import { Product } from '../../../Shared/Models/product.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from '../product.service';
 import { Product_Images } from '../../../Shared/Models/ProductImages';
-import { ToastrService } from 'ngx-toastr';
 import { UtilService } from '../../../Services/util.service';
 import { Cart } from '../../../Shared/Models/Cart';
 import { CommonService } from '../../../Services/common.service';
 import { Wishlist, WishlistOutput } from '../../../Shared/Models/Wishlist';
+import { SocialmediaComponent } from '../../../Components/socialmedia/socialmedia.component';
 
 @Component({
   selector: 'app-product-details',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, SocialmediaComponent],
   templateUrl: './product-details.component.html',
   styleUrl: './product-details.component.css',
 })
@@ -24,6 +24,8 @@ export class ProductDetailsComponent {
   inWishlist: boolean = false;
   product: Product[] = [];
   ProdID!: any;
+
+  isShareOpen: boolean = false;
 
   route = inject(ActivatedRoute);
   router = inject(Router);
@@ -124,5 +126,11 @@ export class ProductDetailsComponent {
         }
       });
     }
+  }
+
+  // Sharing start
+  onShare()
+  {
+    this.isShareOpen =!this.isShareOpen;
   }
 }

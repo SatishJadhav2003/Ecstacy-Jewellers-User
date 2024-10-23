@@ -39,6 +39,7 @@
             />
           </svg> 
           <svg
+          (click)="onShare()"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
             fill="currentColor"
@@ -131,6 +132,7 @@
 
       <div class="grid grid-cols-2 gap-4 mt-6">
         <button
+        
         (click)="addToCart()"
           class="border-yellow-500 border-2 text-yellow-500 font-semibold py-2 rounded-lg hover:bg-yellow-600 hover:text-white"
         >
@@ -145,3 +147,7 @@
     </div>
   </div>
 </div>
+
+@if (isShareOpen) {
+  <app-socialmedia (closeShare)="onShare()" />
+}

@@ -1,0 +1,100 @@
+<div
+  class="fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center transition-opacity duration-300"
+>
+  <!-- Modal Content -->
+  <div class="bg-white p-6 rounded-lg shadow-lg max-w-sm w-full">
+    <h2 class="text-xl font-semibold mb-4 text-center">Share this product</h2>
+
+    <!-- Social Media Buttons -->
+    <div class="space-y-4">
+      <!-- <button
+      (click)="shareOnSocialMedia('instagram')"
+        class="flex items-center justify-between w-full p-3 bg-orange-600 text-white rounded-lg hover:bg-orange-700"
+      >
+        <span class="flex items-center">
+          <img
+            src="https://img.icons8.com/?size=100&id=Xy10Jcu1L2Su&format=png&color=000000"
+            alt=""
+            class="mr-5 w-6 h-6 text-blue-600"
+          />
+          Instagram
+        </span>
+      </button> -->
+
+      <button
+      (click)="shareOnSocialMedia('facebook')"
+        class="flex items-center justify-between w-full p-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+      >
+        <span class="flex items-center">
+          <img
+            src="https://img.icons8.com/?size=100&id=118497&format=png&color=000000"
+            alt=""
+            class="mr-5 w-6 h-6 text-blue-600"
+          />
+          Facebook
+        </span>
+      </button>
+
+      <button
+      (click)="shareOnSocialMedia('whatsapp')"
+        class="flex items-center justify-between w-full p-3 bg-green-500 text-white rounded-lg hover:bg-green-600"
+      >
+        <span class="flex items-center">
+          <img
+            src="https://img.icons8.com/?size=100&id=16713&format=png&color=000000"
+            alt=""
+            class="mr-5 w-6 h-6 text-blue-600"
+          />
+          WhatsApp
+        </span>
+      </button>
+
+      <button
+      (click)="shareOnSocialMedia('x')"
+        class="flex items-center justify-between w-full p-3 bg-gray-700 text-white rounded-lg hover:bg-gray-900"
+      >
+        <span class="flex items-center">
+          <img
+            src="https://img.icons8.com/?size=100&id=phOKFKYpe00C&format=png&color=000000"
+            alt=""
+            class="mr-5 w-6 h-6 text-blue-600"
+          />
+          X (Formaly Twitter)
+        </span>
+      </button>
+
+      <!-- Copy Link Button -->
+      <button
+        (click)="copyLink()"
+        class="flex items-center justify-between w-full p-3 bg-transparent text-black rounded-lg  border-2 border-gray-500"
+      >
+        <span class="flex items-center">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="size-6 mr-5"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 0 1-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 0 1 1.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 0 0-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 0 1-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 0 0-3.375-3.375h-1.5a1.125 1.125 0 0 1-1.125-1.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H9.75"
+            />
+          </svg>
+
+          Copy Link
+        </span>
+      </button>
+    </div>
+
+    <!-- Close Button -->
+    <button
+      class="mt-4 text-sm text-white bg-gold-400 w-full p-3 rounded-lg font-bold"
+      (click)="onClose()"
+    >
+      Cancel
+    </button>
+  </div>
+</div>
