@@ -78,9 +78,9 @@ export class NavbarComponent {
     this.auth.RegistrationModalOpen.set(false);
   }
 
-  navigateHome()
+  navigateTo(path)
   {
-    this.router.navigate([''])
+    this.router.navigate([path])
   }
 
 }

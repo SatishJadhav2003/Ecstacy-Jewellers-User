@@ -1,6 +1,6 @@
 <nav class="bg-white shadow-md px-4 py-2 flex items-center top-0 sticky z-10">
   <!-- Logo Section -->
-  <div (click)="navigateHome()" class="flex pl-2 items-center space-x-2 hover:cursor-pointer" >
+  <div (click)="navigateTo('home')" class="flex pl-2 items-center space-x-2 hover:cursor-pointer" >
     <img src="icons/logogold1.png" alt="Logo" class="h-16 w-auto" />
     <!-- <span class="text-lg font-bold text-gray-900">Jewels EsClassy</span> -->
   </div>
@@ -103,8 +103,8 @@
 
       <!-- Wishlist -->
       <a
-        href="#"
-        class="text-gold-500 hover:text-gold-600 flex flex-col items-center"
+      (click)="navigateTo('user/wishlist')"
+        class="text-gold-500 hover:text-gold-600 flex flex-col items-center hover:cursor-pointer"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -125,8 +125,8 @@
 
       <!-- Cart -->
       <a
-        href="#"
-        class="text-gold-500 hover:text-gold-600 flex flex-col items-center"
+        (click)="navigateTo('user/cart')"
+        class="text-gold-500 hover:text-gold-600 flex flex-col items-center hover:cursor-pointer"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"

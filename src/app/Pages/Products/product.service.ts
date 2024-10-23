@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Product } from '../../Shared/Models/product.model';
 import { Product_Images } from '../../Shared/Models/ProductImages';
 import { Cart, CartOutput } from '../../Shared/Models/Cart';
+import { Wishlist, WishlistOutput } from '../../Shared/Models/Wishlist';
 
 @Injectable({
   providedIn: 'root',
@@ -25,6 +26,7 @@ export class ProductService {
   }
 
   // Cart section start
+  
   addToCart(data: Cart) {
     return this.apiService.post('api/cart', data);
   }
@@ -47,5 +49,22 @@ export class ProductService {
 
   decrementQty(Cart_ID:number) {
     return this.apiService.post('api/cart/decrement', Cart_ID);
+  }
+
+  // Wishlist
+  addToWishlist(data: Wishlist) {
+    return this.apiService.post('api/Wishlist', data);
+  }
+
+  getUserWishlistItems(): Observable<WishlistOutput[]> {
+    const User_ID = parseInt(localStorage.getItem('User_ID'));
+    if (User_ID) {
+      return this.apiService.get('api/Wishlist/' + User_ID);
+    }
+    return null;
+  }
+
+  removeFromWishlist(Wishlist_ID: number): Observable<boolean> {
+    return this.apiService.delete('api/Wishlist/' + Wishlist_ID);
   }
 }

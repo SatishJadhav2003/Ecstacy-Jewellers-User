@@ -28,10 +28,10 @@
         {{ product[0]?.Product_Name }}
         <span class="flex">
           <svg
-            (click)="inCart = !inCart"
+            (click)="wishlistChange()"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
-            [ngClass]="inCart ? 'fill-gold-700' : 'fill-transparent'"
+            [ngClass]="inWishlist ? 'fill-gold-700' : 'fill-transparent'"
             class="h-8 w-8 mr-3 stroke-gold-500 stroke-[1.5] hover:fill-gold-700 cursor-pointer transition-all duration-300"
           >
             <path

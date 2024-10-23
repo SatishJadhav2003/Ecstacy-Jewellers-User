@@ -19,5 +19,8 @@ export class AppComponent {
     this.productService.getUserCartItems().subscribe((data) => {
       localStorage.setItem('CartItems', JSON.stringify(data));
     });
+    this.productService.getUserWishlistItems().subscribe((data) => {
+      localStorage.setItem('WishlistItems', JSON.stringify(data));
+    });
   }
 }
