@@ -92,4 +92,19 @@ export class CartComponent {
       localStorage.setItem('CartItems', JSON.stringify(res));
     });
   }
+
+  placeOrder()
+  {
+    this.router.navigate(
+      ['/checkout'], 
+      { queryParams: 
+          { fromCart: 1, Product_ID:0 } 
+      }
+    );
+  }
+
+  onHome()
+  {
+    this.router.navigate(['']);
+  }
 }

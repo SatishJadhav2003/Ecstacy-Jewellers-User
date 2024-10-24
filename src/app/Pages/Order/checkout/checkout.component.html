@@ -1,0 +1,118 @@
+<div class="flex flex-wrap">
+    <div class="w-1/2 p-2">
+      @for (item of productsList; track $index) {
+      <!-- cart-item.component.html -->
+      <div class="flex items-center p-4 rounded-md shadow-md">
+        <!-- Image Section -->
+        <div (click)="onProduct(item.Product_ID)" class="w-1/4 hover:cursor-pointer">
+          <img
+            [src]="item.Product_Image"
+            [alt]="item.Product_Name"
+            class="w-full rounded-md"
+          />
+        </div>
+  
+        <!-- Product Details Section -->
+        <div class="flex-1 pl-4">
+          <!-- Title and Description Section -->
+          <div class="hover:cursor-pointer"(click)="onProduct(item.Product_ID)"  >
+            <h2 class="text-lg font-semibold w-full">
+              {{ item.Product_Name }}
+            </h2>
+            <p class="text-sm text-gray-600 w-full">
+              {{ item.Description }}
+            </p>
+          </div>
+  
+          <!-- Price and Quantity Section -->
+          <div class="flex items-center justify-between mt-2">
+            <!-- Price Section (50% width) -->
+            <div class="text-red-600 font-bold w-1/2">
+              {{ item.Price | currency : "INR" }}
+            </div>
+  
+            <!-- Quantity Section (50% width) -->
+            <div class="flex items-center w-1/2 justify-end space-x-2">
+              <span>Qty</span>
+              <button
+                (click)="increment($index)"
+                class="bg-gold-400 text-gray-800 rounded-full w-8 h-8 flex items-center justify-center"
+              >
+                +
+              </button>
+              <span>{{ item.Quantity }}</span>
+              <button
+                (click)="decrement($index)"
+                class="bg-gold-400 text-gray-800 rounded-full w-8 h-8 flex items-center justify-center"
+              >
+                -
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      }
+    </div>
+    <div class="w-1/2 p-2">
+      <!-- price-details.component.html -->
+      <div class="bg-white rounded-md shadow-md p-4">
+        <h3 class="text-lg font-bold text-yellow-700 mb-4">Price Details</h3>
+        <div class="border-t border-b border-gray-300  divide-gray-200 font-semibold">
+          <div class="flex justify-between py-2 ">
+            <span >Price ({{ productsList?.length }} Item)</span>
+            <span>{{ Total_Amount | currency : "INR" }}</span>
+          </div>
+          <div class="flex justify-between py-2">
+            <span>Discount</span>
+            <span>-</span>
+          </div>
+          <div class="flex justify-between py-2">
+            <span>Delivery Charges</span>
+            <span class="text-green-600">Free Delivery</span>
+          </div>
+        </div>
+        <div class="flex justify-between mt-4 pt-2">
+          <span class="font-bold">Total Amount</span>
+          <span class="font-bold text-red-600">{{
+            Final_Amount | currency : "INR"
+          }}</span>
+        </div>
+      </div>
+      <!-- address-selection.component.html -->
+      <div class="bg-white rounded-md shadow-md p-4 mt-5">
+        <h3 class="text-lg font-bold text-yellow-700 mb-4">
+          Choose Delivery Address
+        </h3>
+        @for (address of addresses; track $index) {
+        <!-- Address Options -->
+        <div
+          [ngClass]="{
+            'bg-gold-400': selectedAddress === address.Address_ID,
+            border: true,
+            'rounded-md': true,
+            'mb-2': true
+          }"
+        >
+          <label class="flex items-center p-2 cursor-pointer">
+            <input
+              type="radio"
+              name="address"
+              [value]="address.Address_ID"
+              [(ngModel)]="selectedAddress"
+              class="form-radio text-yellow-600 checked:bg-gold-700 focus:ring-gold-700"
+            />
+            <span class="ml-2">
+             <span class="font-bold" >{{address.Address_Type + ": "}}</span> {{  address.Name +" - "+address.Mobile+", "+address.Address_Line1 +" "+address.Address_Line2+", "+address.City+", "+address.State+"-"+address.Postal_Code }}
+            </span>
+          </label>
+        </div>
+        } 
+        <!-- Add New Address -->
+        <div class="mt-4 text-yellow-700 cursor-pointer">+Add New Address</div>
+      </div>
+      <button (click)="placeOrder()" class="bg-yellow-600 text-white rounded w-full py-2 mt-4 font-bold">
+        Pay Now ( {{Final_Amount|currency:'INR'}})
+      </button>
+    </div>
+  </div>
+  

@@ -1,3 +1,4 @@
+@if (productsList?.length >0) {
 <div class="space-y-4">
   @for (item of productsList; track $index) {
   <div class="bg-white rounded-lg shadow p-4 flex items-center space-x-4">
@@ -122,8 +123,22 @@
         Final_Amount | currency : "INR" : "symbol-narrow" : "4.2-2"
       }}</span>
     </div>
-    <button class="bg-yellow-600 text-white rounded w-full py-2 mt-4 font-bold">
+    <button
+      (click)="placeOrder()"
+      class="bg-yellow-600 text-white rounded w-full py-2 mt-4 font-bold"
+    >
       Place Order
     </button>
   </div>
 </div>
+} @else {
+<div class="space-y-4 text-center font-bold text-lg">Your Cart Is Empty</div>
+<div class="flex w-full justify-center mt-6">
+  <button
+  (click)="onHome()"
+    class="bg-yellow-500 text-white font-semibold py-2 px-4 rounded-full hover:bg-yellow-600 transition-colors"
+  >
+    Continue Shopping
+  </button>
+</div>
+}

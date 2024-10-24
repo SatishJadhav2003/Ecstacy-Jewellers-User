@@ -133,4 +133,16 @@ export class ProductDetailsComponent {
   {
     this.isShareOpen =!this.isShareOpen;
   }
+
+
+  buyNow()
+  {
+    this.router.navigate(
+      ['/checkout'], 
+      { queryParams: 
+          { fromCart: 0, Product_ID:this.product[0].Product_ID } 
+      }
+  );
+  
+  }
 }

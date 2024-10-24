@@ -30,6 +30,16 @@ module.exports = {
         "2xl": "1536px",
         // => @media (min-width: 1536px) { ... }
       },
+      animation: {
+        'float-up': 'floatUp 5s ease-in-out infinite',
+      },
+      keyframes: {
+        floatUp: {
+          '0%': { transform: 'translateY(0) translateX(0)', opacity: '1' },
+          '50%': { transform: 'translateY(-20px) translateX(10px)', opacity: '0.8' },
+          '100%': { transform: 'translateY(-40px) translateX(-10px)', opacity: '1' },
+        },
+      },
       
     },
   },

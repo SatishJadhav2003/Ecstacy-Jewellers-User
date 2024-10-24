@@ -5,6 +5,7 @@ export class Product {
   Category_ID?: number;
   Price?: number;
   Stock_Quantity?: number;
+  Quantity?: number;
   Weight?: number;
   Product_Image?: string;
   Is_Active?: boolean;

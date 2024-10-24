@@ -8,6 +8,8 @@ import { ProfileComponent } from './Pages/Account/profile/profile.component';
 import { OrdersComponent } from './Pages/Account/orders/orders.component';
 import { WishlistComponent } from './Pages/Account/wishlist/wishlist.component';
 import { NotificationsComponent } from './Pages/Account/notifications/notifications.component';
+import { CheckoutComponent } from './Pages/Order/checkout/checkout.component';
+import { OrderconfirmComponent } from './Pages/Order/orderconfirm/orderconfirm.component';
 
 export const routes: Routes = [
   {
@@ -49,4 +51,10 @@ export const routes: Routes = [
       }
     ],
   },
+  {
+    path:'checkout',component:CheckoutComponent
+  },
+  {
+    path:'orderconfirmed',component:OrderconfirmComponent
+  }
 ];
