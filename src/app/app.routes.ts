@@ -1,15 +1,4 @@
 import { Routes } from '@angular/router';
-import { HomeComponent } from './Pages/Startup/home/home.component';
-import { ProductListComponent } from './Pages/Products/product-list/product-list.component';
-import { ProductDetailsComponent } from './Pages/Products/product-details/product-details.component';
-import { UserComponent } from './Pages/Account/user/user.component';
-import { CartComponent } from './Pages/Account/cart/cart.component';
-import { ProfileComponent } from './Pages/Account/profile/profile.component';
-import { OrdersComponent } from './Pages/Account/orders/orders.component';
-import { WishlistComponent } from './Pages/Account/wishlist/wishlist.component';
-import { NotificationsComponent } from './Pages/Account/notifications/notifications.component';
-import { CheckoutComponent } from './Pages/Order/checkout/checkout.component';
-import { OrderconfirmComponent } from './Pages/Order/orderconfirm/orderconfirm.component';
 
 export const routes: Routes = [
   {
@@ -19,42 +8,88 @@ export const routes: Routes = [
   },
   {
     path: 'home',
-    component: HomeComponent,
+    loadComponent: () =>
+      import('./Pages/Startup/home/home.component').then(
+        (m) => m.HomeComponent
+      ),
   },
   {
     path: 'product-list/:CateID',
-    component: ProductListComponent,
+    loadComponent: () =>
+      import('./Pages/Products/product-list/product-list.component').then(
+        (m) => m.ProductListComponent
+      ),
   },
   {
     path: 'product-details/:ProdID',
-    component: ProductDetailsComponent,
+    loadComponent: () =>
+      import('./Pages/Products/product-details/product-details.component').then(
+        (m) => m.ProductDetailsComponent
+      ),
   },
   {
     path: 'user',
-    component: UserComponent,
+    loadComponent: () =>
+      import('./Pages/Account/user/user.component').then(
+        (m) => m.UserComponent
+      ),
     children: [
       {
         path: 'cart',
-        component: CartComponent,
+        loadComponent: () =>
+          import('./Pages/Account/cart/cart.component').then(
+            (m) => m.CartComponent
+          ),
       },
       {
-        path:'profile',component:ProfileComponent
+        path: 'profile',
+        loadComponent: () =>
+          import('./Pages/Account/profile/profile.component').then(
+            (m) => m.ProfileComponent
+          ),
       },
       {
-        path:'orders',component:OrdersComponent
+        path: 'orders',
+        loadComponent: () =>
+          import('./Pages/Account/orders/orders.component').then(
+            (m) => m.OrdersComponent
+          ),
       },
       {
-        path:'wishlist',component:WishlistComponent
+        path: 'wishlist',
+        loadComponent: () =>
+          import('./Pages/Account/wishlist/wishlist.component').then(
+            (m) => m.WishlistComponent
+          ),
       },
       {
-        path:'notification',component:NotificationsComponent
-      }
+        path: 'notification',
+        loadComponent: () =>
+          import('./Pages/Account/notifications/notifications.component').then(
+            (m) => m.NotificationsComponent
+          ),
+      },
+      {
+        path: 'addresses',
+        loadComponent: () =>
+          import('./Pages/Account/addresses/addresses.component').then(
+            (m) => m.AddressesComponent
+          ),
+      },
     ],
   },
   {
-    path:'checkout',component:CheckoutComponent
+    path: 'checkout',
+    loadComponent: () =>
+      import('./Pages/Order/checkout/checkout.component').then(
+        (m) => m.CheckoutComponent
+      ),
   },
   {
-    path:'orderconfirmed',component:OrderconfirmComponent
-  }
+    path: 'orderconfirmed',
+    loadComponent: () =>
+      import('./Pages/Order/orderconfirm/orderconfirm.component').then(
+        (m) => m.OrderconfirmComponent
+      ),
+  },
 ];

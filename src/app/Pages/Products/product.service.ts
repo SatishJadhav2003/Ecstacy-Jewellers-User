@@ -5,6 +5,7 @@ import { Product } from '../../Shared/Models/product.model';
 import { Product_Images } from '../../Shared/Models/ProductImages';
 import { Cart, CartOutput } from '../../Shared/Models/Cart';
 import { Wishlist, WishlistOutput } from '../../Shared/Models/Wishlist';
+import { Watchlist, WatchlistOutput } from '../../Shared/Models/Watchlist';
 
 @Injectable({
   providedIn: 'root',
@@ -66,5 +67,22 @@ export class ProductService {
 
   removeFromWishlist(Wishlist_ID: number): Observable<boolean> {
     return this.apiService.delete('api/Wishlist/' + Wishlist_ID);
+  }
+
+  // Watchlist
+  addToWatchlist(data: Watchlist) {
+    return this.apiService.post('api/Watchlist', data);
+  }
+
+  getUserWatchlistItems(): Observable<WatchlistOutput[]> {
+    const User_ID = parseInt(localStorage.getItem('User_ID'));
+    if (User_ID) {
+      return this.apiService.get('api/Watchlist/' + User_ID);
+    }
+    return null;
+  }
+
+  removeFromWatchlist(Watchlist_ID: number): Observable<boolean> {
+    return this.apiService.delete('api/Watchlist/' + Watchlist_ID);
   }
 }
