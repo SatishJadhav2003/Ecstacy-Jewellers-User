@@ -108,7 +108,7 @@
         </div>
         } 
         <!-- Add New Address -->
-        <div class="mt-4 text-yellow-700 cursor-pointer">+Add New Address</div>
+        <div (click)="addAddress()" class="mt-4 text-yellow-700 cursor-pointer">+Add New Address</div>
       </div>
       <button (click)="placeOrder()" class="bg-yellow-600 text-white rounded w-full py-2 mt-4 font-bold">
         Pay Now ( {{Final_Amount|currency:'INR'}})

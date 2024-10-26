@@ -6,6 +6,9 @@ import { CartOutput } from '../../../Shared/Models/Cart';
 import { ProductService } from '../../Products/product.service';
 import { OrderService } from '../order.service';
 import { Address } from '../../../Shared/Models/Address';
+import { NewAddressComponent } from '../../Account/addresses/new-address/new-address.component';
+import { MatDialog } from '@angular/material/dialog';
+import { UtilService } from '../../../Services/util.service';
 
 @Component({
   selector: 'app-checkout',
@@ -19,6 +22,8 @@ export class CheckoutComponent {
   route = inject(ActivatedRoute);
   productService = inject(ProductService);
   orderService = inject(OrderService);
+  dialog = inject(MatDialog);
+  util = inject(UtilService);
   selectedAddress: number = 0;
   addresses: Address[] = [];
   productsList: CartOutput[] = [];
@@ -128,7 +133,6 @@ export class CheckoutComponent {
     console.log(order);
     this.orderService.placeOrder(order).subscribe((res) => {
       if (res) {
-        
         this.router.navigate(['orderconfirmed']);
       }
     });
@@ -143,5 +147,21 @@ export class CheckoutComponent {
 
   onProduct(Product_ID: number) {
     this.router.navigate(['product-details/' + Product_ID]);
+  }
+
+  addAddress() {
+    const dialogRef = this.dialog.open(NewAddressComponent, {
+      width: '400px',
+      disableClose: true,
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        console.log('Form data:', result);
+        this.selectedAddress = result.Address_ID;
+        this.util.success('Address added successfully');
+        this.getAddress();
+      }
+    });
   }
 }

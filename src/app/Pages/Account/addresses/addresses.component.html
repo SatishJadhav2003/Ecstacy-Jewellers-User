@@ -1,5 +1,5 @@
 <button
-(click)="addAddress()"
+  (click)="addAddress()"
   type="button"
   class="flex items-center py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gold-700 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gold-400 hover:text-white focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
 >
@@ -43,6 +43,7 @@
   </div>
   <div class="flex flex-col space-y-4 !ml-auto">
     <button
+    (click)="editAddress($index)"
       class="bg-yellow-600 text-white rounded px-4 py-1 flex justify-center space-x-2 font-bold"
     >
       <span
@@ -64,6 +65,7 @@
       <span>Edit</span>
     </button>
     <button
+      (click)="removeAddress($index)"
       class="bg-yellow-600 text-white rounded px-4 py-1 flex justify-center space-x-2 font-bold"
     >
       <span
@@ -85,17 +87,5 @@
       <span>Remove</span>
     </button>
   </div>
-</div>
-}
-
-<!-- Button to open the modal -->
-
-<!-- Modal Structure -->
-@if (isModalOpen) {
-
-<div
-  class="fixed inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center"
->
-  <app-new-address />
 </div>
 }
