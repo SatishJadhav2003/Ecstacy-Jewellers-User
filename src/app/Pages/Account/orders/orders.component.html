@@ -1,1 +1,283 @@
-<p>orders works!</p>
+<div class="w-full flex">
+  <div class="w-1/2 px-4">
+    <div class="text-gold-600 font-bold text-lg">Current Orders ({{pendingOrderList.length}})</div>
+
+    @for (item of pendingOrderList; track $index) {
+    <div
+      class="bg-white rounded-xl shadow-lg p-6 w-full hover:cursor-pointer mt-4 border-2 border-gold-500"
+    >
+      <div class="flex flex-col sm:flex-row justify-between items-center">
+        <!-- Image Section -->
+        <img
+          class="w-24 h-24 object-cover rounded-lg mb-4 sm:mb-0"
+          [src]="item.Product_Image"
+          [alt]="item.Product_Name"
+        />
+
+        <!-- Content Section -->
+        <div class="sm:ml-4 text-center sm:text-left">
+          <h2 class="text-lg font-bold text-gold-600">
+            {{ item.Product_Name }}
+          </h2>
+          <p class="text-sm text-gray-500 mb-2">
+            {{ item.Description.slice(0, 100) }}
+            @if (item.Description.length > 100) { ... }
+          </p>
+          <p class="text-xl font-semibold text-red-600">
+            {{ item.Total_Amount | currency : "INR" }}
+          </p>
+        </div>
+      </div>
+
+      <!-- Date and Location Section -->
+      <div class="mt-6 flex justify-between items-center">
+        <div class="text-center">
+          <p class="text-lg text-gray-500">01 Dec. 2022</p>
+          <p class="text-xl text-gold-500 font-semibold">Gujrat</p>
+        </div>
+
+        <!-- Line with Truck Icon -->
+        <div class="relative flex-1 mx-4">
+          <div
+            class="absolute left-0 top-1/2 transform -translate-y-1/2 h-1 bg-gradient-to-r from-green-500 w-full"
+          ></div>
+          <div
+            class="absolute left-0 top-1/2 transform -translate-y-1/2 h-6 w-6 bg-green-500 rounded-full flex items-center justify-center"
+          >
+            <div class="h-3 w-3 bg-white rounded-full"></div>
+          </div>
+          <div
+            class="absolute right-0 top-1/2 transform -translate-y-1/2 h-6 w-6 bg-gray-500 rounded-full flex items-center justify-center"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              class="size-5 text-white"
+            >
+              <path
+                d="M6.5 3c-1.051 0-2.093.04-3.125.117A1.49 1.49 0 0 0 2 4.607V10.5h9V4.606c0-.771-.59-1.43-1.375-1.489A41.568 41.568 0 0 0 6.5 3ZM2 12v2.5A1.5 1.5 0 0 0 3.5 16h.041a3 3 0 0 1 5.918 0h.791a.75.75 0 0 0 .75-.75V12H2Z"
+              />
+              <path
+                d="M6.5 18a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3ZM13.25 5a.75.75 0 0 0-.75.75v8.514a3.001 3.001 0 0 1 4.893 1.44c.37-.275.61-.719.595-1.227a24.905 24.905 0 0 0-1.784-8.549A1.486 1.486 0 0 0 14.823 5H13.25ZM14.5 18a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"
+              />
+            </svg>
+          </div>
+        </div>
+
+        <div class="text-center">
+          <p class="text-lg text-gray-500">15 Dec. 2022</p>
+          <p class="text-xl text-gold-500 font-semibold">Nashik</p>
+        </div>
+      </div>
+    </div>
+    }
+
+    <div class="text-gold-600 font-bold text-lg mt-5">Orders History ({{deliveredOrderList.length}})</div>
+    @for (item of deliveredOrderList; track $index) {
+    <div
+      class="bg-white rounded-xl shadow-lg p-6 w-full hover:cursor-pointer mt-4"
+    >
+    <div class="flex flex-col sm:flex-row justify-between items-center">
+      <!-- Image Section -->
+      <img
+        class="w-24 h-24 object-cover rounded-lg mb-4 sm:mb-0"
+        [src]="item.Product_Image"
+        [alt]="item.Product_Name"
+      />
+
+      <!-- Content Section -->
+      <div class="sm:ml-4 text-center sm:text-left">
+        <h2 class="text-lg font-bold text-gold-600">
+          {{ item.Product_Name }}
+        </h2>
+        <p class="text-sm text-gray-500 mb-2">
+          {{ item.Description.slice(0, 100) }}
+          @if (item.Description.length > 100) { ... }
+        </p>
+        <p class="text-xl font-semibold text-red-600">
+          {{ item.Total_Amount | currency : "INR" }}
+        </p>
+      </div>
+    </div>
+
+      <!-- Date and Location Section -->
+      <div class="mt-6 flex justify-between items-center">
+        <div class="text-center">
+          <p class="text-lg text-gray-500">01 Dec. 2022</p>
+          <p class="text-xl text-gold-500 font-semibold">Gujrat</p>
+        </div>
+
+        <!-- Line with Truck Icon -->
+        <div class="relative flex-1 mx-4">
+          <div
+            class="absolute left-0 top-1/2 transform -translate-y-1/2 h-1 bg-green-500 w-full"
+          ></div>
+          <div
+            class="absolute left-0 top-1/2 transform -translate-y-1/2 h-6 w-6 bg-green-500 rounded-full flex items-center justify-center"
+          >
+            <div class="h-3 w-3 bg-white rounded-full"></div>
+          </div>
+          <div
+            class="absolute right-0 top-1/2 transform -translate-y-1/2 h-6 w-6 bg-green-500 rounded-full flex items-center justify-center"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              class="size-5 text-white"
+            >
+              <path
+                d="M6.5 3c-1.051 0-2.093.04-3.125.117A1.49 1.49 0 0 0 2 4.607V10.5h9V4.606c0-.771-.59-1.43-1.375-1.489A41.568 41.568 0 0 0 6.5 3ZM2 12v2.5A1.5 1.5 0 0 0 3.5 16h.041a3 3 0 0 1 5.918 0h.791a.75.75 0 0 0 .75-.75V12H2Z"
+              />
+              <path
+                d="M6.5 18a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3ZM13.25 5a.75.75 0 0 0-.75.75v8.514a3.001 3.001 0 0 1 4.893 1.44c.37-.275.61-.719.595-1.227a24.905 24.905 0 0 0-1.784-8.549A1.486 1.486 0 0 0 14.823 5H13.25ZM14.5 18a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"
+              />
+            </svg>
+          </div>
+        </div>
+
+        <div class="text-center">
+          <p class="text-lg text-gray-500">15 Dec. 2022</p>
+          <p class="text-xl text-gold-500 font-semibold">Nashik</p>
+        </div>
+      </div>
+    </div>
+    }
+  </div>
+  <div class="w-1/2">
+    <div class="rounded-xl shadow-lg p-6">
+      <div class="flex justify-between hover:cursor-pointer">
+        <!-- Image -->
+        <img
+          class="w-28 h-28 object-cover rounded-lg"
+          src="https://via.placeholder.com/100"
+          alt="Necklace Image"
+        />
+
+        <!-- Product Details -->
+        <div class="ml-4">
+          <h2 class="text-lg font-bold text-gray-800">
+            EXQUISITE GOLD NECKLACE SET
+          </h2>
+          <p class="text-sm text-gray-500 mb-2">
+            Floral Necklace And Earrings Set With Colored Stones Crafted In 22
+            Karat Yellow Gold
+          </p>
+          <p class="text-xl font-semibold text-red-600">Price ₹ 2,52,000/-</p>
+          <p class="text-sm text-gray-500">Gold Purity: 22 Karat</p>
+        </div>
+      </div>
+      <div class="flex mt-5">
+        <!-- Progress container -->
+        <div class="relative flex flex-col items-center">
+          <!-- Line container -->
+          <div class="absolute h-[90%] w-1 bg-gray-400"></div>
+          <div class="absolute h-[30%] w-1 bg-gold-400"></div>
+          <div class="absolute h-[30%] w-1 bg-gold-400"></div>
+          <div class="absolute h-[30%] w-1 bg-gold-400"></div>
+
+          <!-- Status circles -->
+          <div
+            class="relative z-2 mb-36 w-6 h-6 rounded-full bg-gold-500 flex items-center justify-center text-white"
+          ></div>
+          <div
+            class="relative z-2 mb-36 w-6 h-6 rounded-full bg-gold-500 flex items-center justify-center text-white"
+          ></div>
+          <div
+            class="relative z-2 mb-36 w-6 h-6 rounded-full bg-green-500 flex items-center justify-center text-white"
+          ></div>
+          <div
+            class="relative z-2 mb-0 w-6 h-6 rounded-full bg-gray-300 flex items-center justify-center text-white"
+          ></div>
+        </div>
+
+        <!-- Status text -->
+        <div class="ml-4 flex flex-col">
+          <!-- Order Confirmed -->
+          <div class="flex items-center mb-14">
+            <div>
+              <div class="text-gold-600 font-bold">Order Confirmed</div>
+              <div class="text-gray-500 text-sm">Sat, 23rd Dec</div>
+              <div class="text-gray-500 text-sm">12:04 pm</div>
+              <div class="text-gray-500 text-sm">
+                Your Order has been placed.
+              </div>
+              <div class="text-gray-500 text-sm font-bold">Gujrat</div>
+            </div>
+          </div>
+
+          <!-- Shipped -->
+          <div class="flex items-center mb-14">
+            <div>
+              <div class="text-gold-600 font-bold">Shipped</div>
+              <div class="text-gray-500 text-sm">Sat, 23rd Dec</div>
+              <div class="text-gray-500 text-sm">12:04 pm</div>
+              <div class="text-gray-500 text-sm">
+                Seller has processed your order.
+              </div>
+              <div class="text-gray-500 text-sm font-bold">Gujrat</div>
+            </div>
+          </div>
+
+          <!-- Out For Delivery -->
+          <div class="flex items-center mb-14">
+            <div>
+              <div class="text-gold-600 font-bold">Out For Delivery</div>
+              <div class="text-gray-500 text-sm">Sun, 24th Dec</div>
+              <div class="text-gray-500 text-sm">12:56 am</div>
+              <div class="text-gray-500 text-sm">
+                Item has been dispatched from the seller warehouse
+              </div>
+              <div class="text-gray-500 text-sm font-bold">Nashik</div>
+            </div>
+          </div>
+
+          <!-- Will be Delivered -->
+          <div class="flex items-center">
+            <div>
+              <div class="text-gold-600 font-bold">Arriving</div>
+              <div class="text-gray-500 text-sm">Sun, 24th Dec</div>
+              <div class="text-gray-500 text-sm">12:56 am</div>
+              <div class="text-gray-500 text-sm font-bold">Nashik</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <div class="flex items-start">
+    <div class="relative flex flex-col items-center">
+   
+      <div class="absolute h-full w-1 bg-gold-400"></div>
+
+      <div
+        class="relative z-10 mb-6 w-6 h-6 rounded-full bg-gold-500 flex items-center justify-center text-white"
+      >
+      
+      </div>
+      <div
+        class="relative z-10 mb-6 w-6 h-6 rounded-full bg-gold-500 flex items-center justify-center text-white"
+      >
+        
+      </div>
+      <div
+        class="relative z-10 mb-6 w-6 h-6 rounded-full bg-green-300 flex items-center justify-center text-white"
+      >
+        
+      </div>
+      <div
+        class="relative z-10 w-6 h-6 rounded-full bg-gray-300 flex items-center justify-center text-white"
+      >
+        
+      </div>
+    </div>
+    <div class="ml-4 flex flex-col">
+      <div class="mb-6">Order Placed</div>
+      <div class="mb-6">Processing</div>
+      <div class="mb-6">Shipped</div>
+      <div>Delivered</div>
+    </div>
+  </div> -->

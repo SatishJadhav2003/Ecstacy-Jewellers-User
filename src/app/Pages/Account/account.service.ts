@@ -2,6 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { ApiRequestService } from '../../Services/api-request.service';
 import { Observable } from 'rxjs';
 import { Address } from '../../Shared/Models/Address';
+import { OrderInputOutput } from './orders/Order';
 
 @Injectable({
   providedIn: 'root',
@@ -27,5 +28,14 @@ export class AccountService {
 
   removeAddress(Address_ID: number) {
     return this.apiService.delete('api/Address/' + Address_ID);
+  }
+
+  // Orders Start
+  getOrders(): Observable<OrderInputOutput[]> {
+    const User_ID = parseInt(localStorage.getItem('User_ID'));
+    if (User_ID) {
+      return this.apiService.get('api/Order/' + User_ID);
+    }
+    return null;
   }
 }
