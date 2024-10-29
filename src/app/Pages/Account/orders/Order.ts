@@ -28,6 +28,7 @@ export class OrderInputOutput {
 
 export class Order_Description {
     Order_ID:number;
+    Order_Item_ID:number;
     Product_Image: string;
     Status: string;
     Status_Timestamp: Date;
