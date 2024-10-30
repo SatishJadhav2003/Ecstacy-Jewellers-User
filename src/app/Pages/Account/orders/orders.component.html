@@ -1,12 +1,12 @@
 <div class="w-full flex">
-  <div class="w-1/2 px-4">
+  <div class="w-1/2 px-4 overflow-y-auto h-full">
     <div class="text-gold-600 font-bold text-lg">
       Current Orders ({{ pendingOrderList.length }})
     </div>
 
     @for (item of pendingOrderList; track $index) {
     <div
-      (click)="getOrderDescription(item.Order_ID)"
+      (click)="getOrderDescription(item.Order_Item_ID)"
       class="bg-white rounded-xl shadow-lg p-6 w-full hover:cursor-pointer mt-4"
       [ngClass]="
         isCurrentOrder(item.Order_ID) ? 'border-2 border-gold-400' : ''
@@ -173,7 +173,7 @@
     </div>
     }
   </div>
-  <div class="w-1/2">
+  <div class="w-1/2 sticky top-14 h-full overflow-y-auto">
     @if (orderDescription?.length >0) {
     <div class="rounded-xl shadow-lg p-6">
       <div class="flex justify-between hover:cursor-pointer">
@@ -332,37 +332,3 @@
     }
   </div>
 </div>
-
-<!-- <div class="flex items-start">
-    <div class="relative flex flex-col items-center">
-   
-      <div class="absolute h-full w-1 bg-gold-400"></div>
-
-      <div
-        class="relative z-10 mb-6 w-6 h-6 rounded-full bg-gold-500 flex items-center justify-center text-white"
-      >
-      
-      </div>
-      <div
-        class="relative z-10 mb-6 w-6 h-6 rounded-full bg-gold-500 flex items-center justify-center text-white"
-      >
-        
-      </div>
-      <div
-        class="relative z-10 mb-6 w-6 h-6 rounded-full bg-green-300 flex items-center justify-center text-white"
-      >
-        
-      </div>
-      <div
-        class="relative z-10 w-6 h-6 rounded-full bg-gray-300 flex items-center justify-center text-white"
-      >
-        
-      </div>
-    </div>
-    <div class="ml-4 flex flex-col">
-      <div class="mb-6">Order Placed</div>
-      <div class="mb-6">Processing</div>
-      <div class="mb-6">Shipped</div>
-      <div>Delivered</div>
-    </div>
-  </div> -->
