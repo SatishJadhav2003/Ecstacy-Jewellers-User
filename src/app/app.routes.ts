@@ -29,54 +29,8 @@ export const routes: Routes = [
   },
   {
     path: 'user',
-    loadComponent: () =>
-      import('./Pages/Account/user/user.component').then(
-        (m) => m.UserComponent
-      ),
-    children: [
-      {
-        path: 'cart',
-        loadComponent: () =>
-          import('./Pages/Account/cart/cart.component').then(
-            (m) => m.CartComponent
-          ),
-      },
-      {
-        path: 'profile',
-        loadComponent: () =>
-          import('./Pages/Account/profile/profile.component').then(
-            (m) => m.ProfileComponent
-          ),
-      },
-      {
-        path: 'orders',
-        loadComponent: () =>
-          import('./Pages/Account/orders/orders.component').then(
-            (m) => m.OrdersComponent
-          ),
-      },
-      {
-        path: 'wishlist',
-        loadComponent: () =>
-          import('./Pages/Account/wishlist/wishlist.component').then(
-            (m) => m.WishlistComponent
-          ),
-      },
-      {
-        path: 'notification',
-        loadComponent: () =>
-          import('./Pages/Account/notifications/notifications.component').then(
-            (m) => m.NotificationsComponent
-          ),
-      },
-      {
-        path: 'addresses',
-        loadComponent: () =>
-          import('./Pages/Account/addresses/addresses.component').then(
-            (m) => m.AddressesComponent
-          ),
-      },
-    ],
+    loadChildren: () =>
+      import('./Pages/Account/account.routes').then((m) => m.routes),
   },
   {
     path: 'checkout',
@@ -90,6 +44,13 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./Pages/Order/orderconfirm/orderconfirm.component').then(
         (m) => m.OrderconfirmComponent
+      ),
+  },
+  {
+    path: 'contactus',
+    loadComponent: () =>
+      import('./Pages/Other/contact-us/contact-us.component').then(
+        (m) => m.ContactUsComponent
       ),
   },
 ];
