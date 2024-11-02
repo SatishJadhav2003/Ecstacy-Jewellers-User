@@ -1,1 +1,231 @@
-<p>contact-us works!</p>
+<div class="w-screen h-screen overflow-hidden relative">
+  <div class="absolute inset-0 flex items-center justify-center">
+    <!-- Full-width and full-height background image -->
+    <img
+      class="w-full h-full object-cover"
+      src="images/bg/flowers.jpeg"
+      alt=""
+    />
+    <!-- Centered logo on top of the background image -->
+    <img class="absolute" src="icons/logogold.png" alt="" />
+  </div>
+</div>
+<div class="flex">
+  <div class="w-1/2">
+    <div class="text-center max-w-md mx-auto text-gray-800 mt-10">
+      <!-- Logo and title -->
+      <div class="flex flex-col items-center space-y-2">
+        <img
+          src="icons/logogold-hr.png"
+          alt="Jewels Ecstasy Logo"
+          class="w-64 h-24"
+        />
+        <!-- Replace with your logo path -->
+      </div>
+
+      <!-- Contact Information -->
+      <div class="mt-6 space-y-4 text-left">
+        <div class="flex items-center space-x-3">
+          <svg
+            class="w-6 h-6 text-gold-600"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M12 2C8.136 2 4.8 5.336 4.8 9.2 4.8 17.2 12 22 12 22s7.2-4.8 7.2-12.8c0-3.864-3.336-7.2-7.2-7.2zm0 9.6a2.4 2.4 0 1 1 0-4.8 2.4 2.4 0 0 1 0 4.8z"
+            />
+          </svg>
+          <p class="text-sm">
+            Flat No 08, Plot No 04, Shiv Krupa Appartment, Kale Nagar, Nashik
+          </p>
+        </div>
+        <div class="flex items-center space-x-3">
+          <svg
+            class="w-6 h-6 text-gold-600"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M6.6 2A4.6 4.6 0 0 0 2 6.6v10.8A4.6 4.6 0 0 0 6.6 22h10.8a4.6 4.6 0 0 0 4.6-4.6V6.6A4.6 4.6 0 0 0 17.4 2H6.6zm4.14 3h2.52a.2.2 0 0 1 .2.2v1.3a.2.2 0 0 1-.2.2h-2.52a.2.2 0 0 1-.2-.2V5.2a.2.2 0 0 1 .2-.2zM12 17.8a5.8 5.8 0 1 1 0-11.6 5.8 5.8 0 0 1 0 11.6zm0-9.2a3.4 3.4 0 1 0 0 6.8 3.4 3.4 0 0 0 0-6.8z"
+            />
+          </svg>
+          <p class="text-sm">+917030972171</p>
+        </div>
+        <div class="flex items-center space-x-3">
+          <svg
+            class="w-6 h-6 text-gold-600"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M21 4H3a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1zM3 5l9 7 9-7v14H3V5z"
+            />
+          </svg>
+          <p class="text-sm">{{ "jewelsecstasy1@gmail.com" }}</p>
+        </div>
+      </div>
+
+      <!-- Instagram Section -->
+      <div class="mt-8">
+        <h3 class="text-xs font-medium text-gold-600">
+          FOLLOW US ON INSTAGRAM
+        </h3>
+        <div class="flex flex-col items-center mt-2">
+          <img
+            src="Other/instaqr.png"
+            alt="Instagram QR Code"
+            class="w-24 h-24 border border-gold-600 rounded-md object-contain"
+          />
+          <!-- Replace with your QR code path -->
+          <!-- <p class="text-xs font-medium text-gold-600 mt-1">
+            {{ "@JEWELSECTASY" }}
+          </p> -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="w-1/2 flex justify-center">
+    <div class="bg-white p-8 rounded-lg shadow-lg w-full">
+      <!-- Form Header -->
+      <h2 class="text-center text-2xl font-bold text-gold-600 mb-6">
+        GET IN TOUCH
+      </h2>
+
+      <!-- Form Fields -->
+      <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" class="space-y-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <!-- First Name -->
+          <div>
+            <label
+              class="block text-sm font-semibold mb-1"
+              [ngClass]="{
+                'text-red-500': contactForm.get('firstName')?.invalid && contactForm.get('firstName')?.touched,
+                'text-gray-600': !(contactForm.get('firstName')?.invalid && contactForm.get('firstName')?.touched)
+              }"
+            >
+              First Name*
+            </label>
+            <input
+              type="text"
+              formControlName="firstName"
+              class="w-full p-3 rounded-lg bg-gold-300 text-black border focus:outline-none"
+              [ngClass]="{
+                'border-red-500': contactForm.get('firstName')?.invalid && contactForm.get('firstName')?.touched,
+                'border-transparent focus:border-gold-600': !(contactForm.get('firstName')?.invalid && contactForm.get('firstName')?.touched)
+              }"
+              placeholder="First Name"
+            />
+          </div>
+      
+          <!-- Last Name -->
+          <div>
+            <label
+              class="block text-sm font-semibold mb-1"
+              [ngClass]="{
+                'text-red-500': contactForm.get('lastName')?.invalid && contactForm.get('lastName')?.touched,
+                'text-gray-600': !(contactForm.get('lastName')?.invalid && contactForm.get('lastName')?.touched)
+              }"
+            >
+              Last Name*
+            </label>
+            <input
+              type="text"
+              formControlName="lastName"
+              class="w-full p-3 rounded-lg bg-gold-300 text-black border focus:outline-none"
+              [ngClass]="{
+                'border-red-500': contactForm.get('lastName')?.invalid && contactForm.get('lastName')?.touched,
+                'border-transparent focus:border-gold-600': !(contactForm.get('lastName')?.invalid && contactForm.get('lastName')?.touched)
+              }"
+              placeholder="Last Name"
+            />
+          </div>
+        </div>
+      
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <!-- Email -->
+          <div>
+            <label
+              class="block text-sm font-semibold mb-1"
+              [ngClass]="{
+                'text-red-500': contactForm.get('email')?.invalid && contactForm.get('email')?.touched,
+                'text-gray-600': !(contactForm.get('email')?.invalid && contactForm.get('email')?.touched)
+              }"
+            >
+              Email *
+            </label>
+            <input
+              type="email"
+              formControlName="email"
+              class="w-full p-3 rounded-lg bg-gold-300 text-black border focus:outline-none"
+              [ngClass]="{
+                'border-red-500': contactForm.get('email')?.invalid && contactForm.get('email')?.touched,
+                'border-transparent focus:border-gold-600': !(contactForm.get('email')?.invalid && contactForm.get('email')?.touched)
+              }"
+              placeholder="Email Address"
+            />
+          </div>
+      
+          <!-- Phone Number -->
+          <div>
+            <label
+              class="block text-sm font-semibold mb-1"
+              [ngClass]="{
+                'text-red-500': contactForm.get('phoneNumber')?.invalid && contactForm.get('phoneNumber')?.touched,
+                'text-gray-600': !(contactForm.get('phoneNumber')?.invalid && contactForm.get('phoneNumber')?.touched)
+              }"
+            >
+              Phone Number*
+            </label>
+            <input
+              type="tel"
+              formControlName="phoneNumber"
+              class="w-full p-3 rounded-lg bg-gold-300 text-black border focus:outline-none"
+              [ngClass]="{
+                'border-red-500': contactForm.get('phoneNumber')?.invalid && contactForm.get('phoneNumber')?.touched,
+                'border-transparent focus:border-gold-600': !(contactForm.get('phoneNumber')?.invalid && contactForm.get('phoneNumber')?.touched)
+              }"
+              placeholder="Phone Number"
+            />
+          </div>
+        </div>
+      
+        <!-- Subject -->
+        <div>
+          <label
+            class="block text-sm font-semibold mb-1"
+            [ngClass]="{
+              'text-red-500': contactForm.get('subject')?.invalid && contactForm.get('subject')?.touched,
+              'text-gray-600': !(contactForm.get('subject')?.invalid && contactForm.get('subject')?.touched)
+            }"
+          >
+            Subject
+          </label>
+          <input
+            type="text"
+            formControlName="subject"
+            class="w-full p-3 rounded-lg bg-gold-300 text-black border focus:outline-none"
+            [ngClass]="{
+              'border-red-500': contactForm.get('subject')?.invalid && contactForm.get('subject')?.touched,
+              'border-transparent focus:border-gold-600': !(contactForm.get('subject')?.invalid && contactForm.get('subject')?.touched)
+            }"
+            placeholder="Subject"
+          />
+        </div>
+      
+        <!-- Submit Button -->
+        <div class="flex justify-center mt-6">
+          <button
+            type="submit"
+            class="px-6 py-3 rounded-full text-white bg-gradient-to-r from-yellow-500 to-gold-600 font-semibold hover:from-yellow-600 hover:to-gold-700 focus:outline-none"
+          >
+            SEND MESSAGE
+          </button>
+        </div>
+      </form>
+      
+    </div>
+  </div>
+</div>
