@@ -53,4 +53,11 @@ export const routes: Routes = [
         (m) => m.ContactUsComponent
       ),
   },
+  {
+    path:'customize',
+    loadComponent: () =>
+    import('./Pages/Other/customize-jewellery/customize-jewellery.component').then(
+      (m) => m.CustomizeJewelleryComponent
+    ),
+  }
 ];

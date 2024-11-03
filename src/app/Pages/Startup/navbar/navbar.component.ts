@@ -7,11 +7,11 @@ import { StartupService } from '../startup.service';
 import { AuthService } from '../../../Authentication/auth.service';
 import { LoginComponent } from "../../../Authentication/login/login.component";
 import { RegisterComponent } from "../../../Authentication/register/register.component";
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [MnDropdownComponent, CommonModule, LoginComponent, RegisterComponent],
+  imports: [MnDropdownComponent, CommonModule, LoginComponent, RegisterComponent,RouterModule],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 }) 
