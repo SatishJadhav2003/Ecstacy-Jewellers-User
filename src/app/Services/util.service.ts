@@ -34,5 +34,14 @@ export class UtilService {
     })
   }
 
+  warn(message:string,time?:number)
+  {
+    this._toastr.warning(message,'',{
+      timeOut: time?time:1500,
+      positionClass:'toast-bottom-center',
+      
+    })
+  }
+
 
 }

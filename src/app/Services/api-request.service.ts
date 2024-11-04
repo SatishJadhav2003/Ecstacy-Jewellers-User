@@ -1,12 +1,18 @@
-import { HttpHeaders, HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import {
+  HttpHeaders,
+  HttpClient,
+  HttpErrorResponse,
+} from '@angular/common/http';
+import { Injectable, inject } from '@angular/core';
 import { catchError, map, Observable, throwError } from 'rxjs';
 import { apiUrl, appConfig } from '../app.config';
+import { UtilService } from './util.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ApiRequestService {
+  util = inject(UtilService);
 
   // Base URL for the API
   private baseUrl = apiUrl;
@@ -14,18 +20,18 @@ export class ApiRequestService {
   // Define common headers
   private headers = new HttpHeaders({
     'Content-Type': 'application/json',
-    'Authorization': `Bearer ${this.getToken()}` ,
+    Authorization: `Bearer ${this.getToken()}`,
     'Access-Control-Allow-Headers': 'Content-Type',
     'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE',
-    'Access-Control-Allow-Origin': '*'
+    'Access-Control-Allow-Origin': '*',
   });
 
   // Function to retrieve token (for example, from localStorage)
   private getToken(): string | null {
-    return localStorage.getItem('authToken');  // Adjust according to your token storage mechanism
+    return localStorage.getItem('authToken'); // Adjust according to your token storage mechanism
   }
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   // GET Request
   get<T>(endpoint: string, params?: any): Observable<T> {
@@ -43,17 +49,8 @@ export class ApiRequestService {
     };
 
     return this.http
-      .post( url, body, requestOptions)
-      .pipe(
-        map((resp: any) => resp),
-        catchError((error: HttpErrorResponse) => {
-          if (error.status === 401) {
-           console.log(error);
-           
-          }
-          return throwError(error || 'Server error');
-        })
-      );
+      .post(url, body, requestOptions)
+      .pipe(catchError(this.handleError));
   }
 
   // PUT Request
@@ -66,5 +63,30 @@ export class ApiRequestService {
   delete<T>(endpoint: string): Observable<T> {
     const url = `${this.baseUrl}/${endpoint}`;
     return this.http.delete<T>(url, { headers: this.headers });
+  }
+
+   // POST Request
+   postImage(endpoint: string, body: any): Observable<any> {
+    const url = `${this.baseUrl}/${endpoint}`;
+    
+
+    return this.http
+      .post(url, body)
+      .pipe(catchError(this.handleError));
+  }
+
+  private handleError(error: HttpErrorResponse) {
+    let errorMessage = 'An unknown error occurred!';
+    if (error.error instanceof ErrorEvent) {
+      // Client-side or network error
+      errorMessage = `Error: ${error.error.message}`;
+      this.util.error(errorMessage);
+    } else {
+      // Backend error
+      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+      this.util.error(errorMessage);
+
+    }
+    return throwError(errorMessage);
   }
 }

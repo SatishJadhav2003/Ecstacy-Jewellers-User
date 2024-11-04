@@ -18,4 +18,6 @@ export class CommonService {
     const WishlistItems = JSON.parse(localStorage.getItem('WishlistItems')) || [];
     return !!WishlistItems.find((c) => c.Product_ID == Product_ID);
   }
+
+  
 }

@@ -82,21 +82,14 @@
           formControlName="category"
           class="w-full border-b-2 border-gold-300 focus:border-gold-500 outline-none p-1"
         >
-          <option value="">Select Category</option>
-          <option value="ring">Ring</option>
-          <option value="necklace">Necklace</option>
-          <option value="bracelet">Bracelet</option>
-          <option value="earrings">Earrings</option>
+          @for (item of categoryList; track $index) {
+          <option [value]="item.Category_ID">{{item.Category_Name}}</option>
+          }
         </select>
-        <div
-          *ngIf="
-            jewelryForm.get('category')?.invalid &&
-            jewelryForm.get('category')?.touched
-          "
-          class="text-red-500 text-xs"
-        >
-          Category is required.
-        </div>
+        @if (jewelryForm.get('category')?.invalid &&
+        jewelryForm.get('category')?.touched) {
+        <div class="text-red-500 text-xs">Category is required.</div>
+        }
       </div>
 
       <!-- Purity Field -->
@@ -189,16 +182,18 @@
           <span>10,00,000</span>
         </div>
         <div class="text-center text-sm font-semibold text-gold-600 mt-2">
-           Price: {{ jewelryForm.get('price')?.value | currency:'INR':'symbol':'1.0-0' }}
+          Price:
+          {{
+            jewelryForm.get("price")?.value
+              | currency : "INR" : "symbol" : "1.0-0"
+          }}
         </div>
       </div>
-      
 
       <!-- Submit Button -->
       <div class="col-span-1 md:col-span-2 mt-6">
         <button
           type="submit"
-          [disabled]="jewelryForm.invalid"
           class="w-full bg-gold-500 text-white py-2 rounded-md font-semibold hover:bg-gold-600"
         >
           SUBMIT
