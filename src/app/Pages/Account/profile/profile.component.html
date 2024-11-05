@@ -1,1 +1,197 @@
-<p>profile works!</p>
+<div class="flex flex-wrap pb-5">
+  <!-- Personal Information Section -->
+  <div class="w-full md:w-1/2 px-4">
+    <div>
+      <div class="flex items-center justify-between mb-6">
+        <h2 class="text-2xl font-semibold text-gold-500">
+          My Profile
+        </h2>
+        <span class="cursor-pointer">
+          @if (!isEditing) {
+          <svg
+            (click)="toggleEdit()"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="size-6 text-blue-500"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125"
+            />
+          </svg>
+
+          }
+        </span>
+      </div>
+
+      <!-- Form -->
+      <form [formGroup]="userInfoForm" class="space-y-4">
+        <!-- Name Field -->
+        <div class="flex items-center">
+          <div class="relative w-1/2 pr-3">
+            <input
+              type="text"
+              id="floating_outlined"
+              class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+              placeholder=" "
+              formControlName="name"
+            />
+            <label
+              for="floating_outlined"
+              class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1"
+              >First Name</label
+            >
+          </div>
+          <div class="relative w-1/2 ml-3">
+            <input
+              type="text"
+              id="floating_outlined"
+              class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+              placeholder=" "
+              formControlName="name"
+            />
+            <label
+              for="floating_outlined"
+              class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1"
+              >First Name</label
+            >
+          </div>
+        </div>
+
+        <!-- Gender Field -->
+        <div class="flex items-center">
+          <label for="gender" class="w-1/4 text-lg font-medium">Gender :</label>
+          <div class="w-3/4 flex gap-4">
+            <label class="inline-flex items-center">
+              <input
+                type="radio"
+                formControlName="gender"
+                value="male"
+                class="form-radio text-blue-500"
+              />
+              <span class="ml-2">Male</span>
+            </label>
+            <label class="inline-flex items-center">
+              <input
+                type="radio"
+                formControlName="gender"
+                value="female"
+                class="form-radio text-blue-500"
+              />
+              <span class="ml-2">Female</span>
+            </label>
+            <label class="inline-flex items-center">
+              <input
+                type="radio"
+                formControlName="gender"
+                value="other"
+                class="form-radio text-blue-500"
+              />
+              <span class="ml-2">Other</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Mobile Field -->
+        <div class="flex items-center">
+          <div class="relative w-full">
+            <input
+              type="text"
+              id="floating_outlined"
+              class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+              placeholder=" "
+              formControlName="mobile"
+            />
+            <label
+              for="floating_outlined"
+              class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1"
+              >Mobile</label
+            >
+          </div>
+        </div>
+
+        <!-- Email Field -->
+        <div class="flex items-center">
+          <div class="relative w-full">
+            <input
+              type="text"
+              id="floating_outlined"
+              class="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+              placeholder=" "
+              formControlName="email"
+            />
+            <label
+              for="floating_outlined"
+              class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1"
+              >Email</label
+            >
+          </div>
+        </div>
+
+        <!-- Submit and Cancel Buttons -->
+        <div class="flex space-x-4 pt-2">
+          @if (isEditing) {
+          <button
+            (click)="onSubmit()"
+            class="px-4 py-2 w-1/2 bg-gold-500 text-white rounded hover:bg-gold-700"
+          >
+            Submit
+          </button>
+          <button
+            (click)="onCancel()"
+            class="px-4 py-2 w-1/2 bg-gray-500 text-white rounded hover:bg-gray-600"
+          >
+            Cancel
+          </button>
+          }
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- FAQs Section -->
+  <div class="w-full md:w-1/2 px-4">
+    <div>
+      <h2 class="text-lg text-gold-500 font-semibold mb-2">FAQs</h2>
+
+      <!-- FAQ Items -->
+      <div class="space-y-4">
+        <div>
+          <h4 class="text-base font-medium">
+            What happens when I update my email address (or mobile number)?
+          </h4>
+          <p class="text-sm text-gray-600">
+            Your login email id (or mobile number) changes, likewise. You'll
+            receive all your account-related communication on your updated email
+            address (or mobile number).
+          </p>
+        </div>
+        <div>
+          <h4 class="text-base font-medium">
+            When will my account be updated with the new email address (or
+            mobile number)?
+          </h4>
+          <p class="text-sm text-gray-600">
+            It happens as soon as you confirm the verification code sent to your
+            email (or mobile) and save the changes.
+          </p>
+        </div>
+        <div>
+          <h4 class="text-base font-medium">
+            What happens to my existing account when I update my email address
+            (or mobile number)?
+          </h4>
+          <p class="text-sm text-gray-600">
+            Updating your email address (or mobile number) doesn't invalidate
+            your account. Your account remains fully functional. You'll continue
+            seeing your Order history, saved information, and personal details.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
