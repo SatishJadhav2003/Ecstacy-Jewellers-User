@@ -24,7 +24,7 @@ export class ProductDetailsComponent {
   inWishlist: boolean = false;
   product: Product[] = [];
   ProdID!: any;
-
+  reviewsImgList: any[] = [];
   isShareOpen: boolean = false;
 
   route = inject(ActivatedRoute);
@@ -129,20 +129,13 @@ export class ProductDetailsComponent {
   }
 
   // Sharing start
-  onShare()
-  {
-    this.isShareOpen =!this.isShareOpen;
+  onShare() {
+    this.isShareOpen = !this.isShareOpen;
   }
 
-
-  buyNow()
-  {
-    this.router.navigate(
-      ['/checkout'], 
-      { queryParams: 
-          { fromCart: 0, Product_ID:this.product[0].Product_ID } 
-      }
-  );
-  
+  buyNow() {
+    this.router.navigate(['/checkout'], {
+      queryParams: { fromCart: 0, Product_ID: this.product[0].Product_ID },
+    });
   }
 }
