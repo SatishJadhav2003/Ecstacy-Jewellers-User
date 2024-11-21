@@ -6,6 +6,8 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms';
 import { AccountService } from '../account.service';
+import { UtilService } from '../../../Services/util.service';
+import { User } from '../../../Shared/Models/User.mdel';
 
 @Component({
   selector: 'app-profile',
@@ -20,6 +22,7 @@ export class ProfileComponent {
 
   // Servies
   accountService = inject(AccountService);
+  util = inject(UtilService);
   constructor(private fb: FormBuilder) {
     this.userInfoForm = this.fb.group({
       firstname: ['', Validators.required],
@@ -27,6 +30,9 @@ export class ProfileComponent {
       gender: ['', Validators.required],
       mobile: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]],
       email: ['', [Validators.required, Validators.email]],
+      userid:[0],
+      phoneverified:[false],
+      emailverified:[false],
     });
     this.getUserInfo();
     this.toggleEdit();
@@ -54,9 +60,37 @@ export class ProfileComponent {
   onSubmit(): void {
     if (this.userInfoForm.valid) {
       const userData = this.userInfoForm.value;
-      console.log('User Data:', userData);
-      // Perform any further processing, e.g., sending to a server
-      this.toggleEdit(); // Exit editing mode
+      console.log(userData);
+      
+      const temp :User = {
+        User_ID: parseInt(this.userInfoForm.get('userid').value),
+        First_Name:this.userInfoForm.get('firstname').value,
+        Last_Name:this.userInfoForm.get('lastname').value,
+        Email:this.userInfoForm.get('email').value,
+        Email_Verified: false,
+        Phone_Number:this.userInfoForm.get('mobile').value,
+        Phone_Verified: false,
+        Password_Hash:'',
+        Password_Salt:'',
+        Date_Created: undefined,
+        Is_Active: true,
+        Gender:this.userInfoForm.get('gender').value
+      }
+      this.accountService.updateUserInfo(temp).subscribe((res) => {
+        if (res) {
+          this.util.success('Profile updated succesfully');
+          this.toggleEdit(); // Exit editing mode
+        }
+        else
+        {
+          this.util.error("Error while updating user info");
+          console.log(res);
+          
+        }
+      },err=>{
+        console.log(err);
+        
+      });
     } else {
       console.log('Form is invalid');
     }
@@ -78,6 +112,9 @@ export class ProfileComponent {
           mobile: res[0].Phone_Number.trim(),
           email: res[0].Email.trim(),
           gender: res[0].Gender.trim(),
+          userid: res[0].User_ID,
+          phoneverified: res[0].Phone_Verified,
+          emailverified: res[0].Email_Verified,
         });
       }
     });

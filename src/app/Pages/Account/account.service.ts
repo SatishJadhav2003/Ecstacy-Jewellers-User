@@ -49,4 +49,9 @@ export class AccountService {
   {
     return this.apiService.get('api/User/'+localStorage.getItem('User_ID'));
   }
+
+  updateUserInfo(data:User)
+  {
+   return this.apiService.post('api/User/updateinfo',data);
+  }
 }
