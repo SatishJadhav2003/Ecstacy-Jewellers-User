@@ -9,11 +9,12 @@ import { Cart } from '../../../Shared/Models/Cart';
 import { CommonService } from '../../../Services/common.service';
 import { Wishlist, WishlistOutput } from '../../../Shared/Models/Wishlist';
 import { SocialmediaComponent } from '../../../Components/socialmedia/socialmedia.component';
+import { RatingReviewsComponent } from "../rating-reviews/rating-reviews.component";
 
 @Component({
   selector: 'app-product-details',
   standalone: true,
-  imports: [CommonModule, SocialmediaComponent],
+  imports: [CommonModule, SocialmediaComponent, RatingReviewsComponent],
   templateUrl: './product-details.component.html',
   styleUrl: './product-details.component.css',
 })
@@ -24,7 +25,6 @@ export class ProductDetailsComponent {
   inWishlist: boolean = false;
   product: Product[] = [];
   ProdID!: any;
-  reviewsImgList: any[] = [];
   isShareOpen: boolean = false;
 
   route = inject(ActivatedRoute);
@@ -138,4 +138,7 @@ export class ProductDetailsComponent {
       queryParams: { fromCart: 0, Product_ID: this.product[0].Product_ID },
     });
   }
+
+
+  
 }

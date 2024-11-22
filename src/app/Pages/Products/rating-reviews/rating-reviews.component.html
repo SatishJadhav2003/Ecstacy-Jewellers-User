@@ -1,0 +1,118 @@
+<div class="bg-white rounded-lg w-full mx-auto overflow-y-auto">
+  <h2 class="text-xl font-bold text-yellow-800 flex justify-between mb-4 p-4">
+    Ratings & Reviews
+  </h2>
+  @if (canRateProduct) {
+  <div id="starRating" class="flex space-x-2 mb-4 p-4 justify-evenly">
+    @for ( star of [1, 2, 3, 4, 5]; track $index) {
+    <button
+      class="text-gray-400 hover:text-yellow-400 flex flex-col items-center"
+      [ngClass]="{ 'text-yellow-400': $index < rating }"
+      (click)="setRating($index + 1)"
+    >
+      <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+        <path
+          d="M12 .587l3.668 7.568L24 9.748l-6 5.857 1.415 8.284L12 18.401l-7.415 4.488L6 15.605 0 9.748l8.332-1.593L12 .587z"
+        />
+      </svg>
+      <span>{{ ratingLabels[$index] }}</span></button
+    >}
+  </div>
+
+  <!-- Review Message -->
+  <div class="p-4">
+    <textarea
+      class="w-full border rounded-lg focus:ring-2 focus:ring-gold-400 p-4"
+      rows="4"
+      [(ngModel)]="reviewText"
+      placeholder="Write your review here..."
+    ></textarea>
+  </div>
+
+  <!-- Photo Upload -->
+  <div class="p-4">
+    <label class="block text-gray-700 font-medium mb-2" for="uploadPhotos">
+      Upload Photos (optional):
+    </label>
+    <input
+    type="file"
+    id="uploadPhotos"
+    accept="image/*"
+    multiple
+    class="block w-full text-gray-600 border border-gray-300 rounded-lg p-2 cursor-pointer focus:outline-none focus:ring-2 focus:ring-gold-400"
+    (change)="onFileSelected($event)"
+  />
+  
+  </div>
+
+  <!-- Submit Button -->
+  <div class="p-4">
+    <button
+      class="w-full bg-gold-500 text-white p-3 rounded-lg hover:bg-gold-600"
+      (click)="submitReview()"
+    >
+      Submit Review
+    </button>
+  </div>
+
+  }
+</div>
+
+@if (reviewsImgList?.length >0) {
+<div
+  class="w-full flex flex-row space-x-2 mb-4 p-4 border-b-2 border-solid border-[#f0f0f0]"
+>
+  @for (item of reviewsImgList; track $index) {
+  <img
+    class="border-2 h-24 object-contain hover:cursor-pointer"
+    [src]="item.Image_URL"
+  />
+  }
+</div>
+}
+<div class="border-b-2 border-solid border-[#f0f0f0] p-4">
+  <h3 class="flex flex-row font-medium">
+    <div class="flex items-center text-xs">
+      <span class="p-1 bg-green-500 rounded-md mr-2 text-white font-bold"
+        >4.6 <span class="text-white">★</span>
+      </span>
+    </div>
+    Very nice ring
+  </h3>
+  <p class="text-[#212121] my-1 text-sm">
+    i orders this ring and its delivered within 2 days , very good sevrice
+  </p>
+
+  <div class="flex flex-row w-full space-x-2 mb-4 float-left">
+    <img
+      class="border-2 h-24 object-contain hover:cursor-pointer"
+      [src]="'images/products/ring4.jpg'"
+    />
+  </div>
+  <div class="text-sm text-[#878787]">
+    Satish jadhav <span>, 12 Aug 2024</span>
+  </div>
+</div>
+<div class="border-b-2 border-solid border-[#f0f0f0] p-4">
+  <h3 class="flex flex-row font-medium">
+    <div class="flex items-center text-xs">
+      <span class="p-1 bg-green-500 rounded-md mr-2 text-white font-bold"
+        >4.6 <span class="text-white">★</span>
+      </span>
+    </div>
+    Very nice ring
+  </h3>
+  <p class="text-[#212121] my-1 text-sm">
+    i orders this ring and its delivered within 2 days , very good sevrice
+  </p>
+
+  <div class="flex flex-row w-full space-x-2 mb-4 float-left">
+    <img
+      class="border-2 h-24 object-contain hover:cursor-pointer"
+      [src]="'images/products/ring4.jpg'"
+    />
+  </div>
+  <div class="text-sm text-[#878787]">
+    Satish jadhav <span>, 12 Aug 2024</span>
+  </div>
+</div>

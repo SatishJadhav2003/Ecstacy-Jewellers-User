@@ -85,4 +85,16 @@ export class ProductService {
   removeFromWatchlist(Watchlist_ID: number): Observable<boolean> {
     return this.apiService.delete('api/Watchlist/' + Watchlist_ID);
   }
+
+  // Rating & reviews
+  canRate(Product_ID:number):Observable<boolean>
+  {
+    const User_ID = parseInt(localStorage.getItem('User_ID'));
+    return this.apiService.get('api/RatingReview/CanUserRateProduct/'+User_ID+'/'+Product_ID);
+  }
+
+  saveRatingReview(data:any)
+  {
+    return this.apiService.postImage('api/RatingReview',data);
+  }
 }
