@@ -2,9 +2,14 @@ import { Component, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductService } from '../product.service';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
-
+import {
+  FormBuilder,
+  FormGroup,
+  FormsModule,
+  Validators,
+} from '@angular/forms';
+import { imageUrl } from '../../../app.config';
+import { UtilService } from '../../../Services/util.service';
 @Component({
   selector: 'app-rating-reviews',
   standalone: true,
@@ -13,22 +18,39 @@ import { HttpClient } from '@angular/common/http';
   styleUrl: './rating-reviews.component.css',
 })
 export class RatingReviewsComponent {
-  reviewsImgList: any[] = [];
+  ratingReviewList: any[] = [];
   rating: number = 0;
   ProdID: any = 0;
   canRateProduct: boolean = false;
   reviewText: string = '';
   files: File[] = [];
   ratingLabels = ['Hated it', "Didn't Like", 'Was Ok', 'Liked', 'Loved it'];
+  reviewForm: FormGroup;
 
   // Dependecies
   readonly route = inject(ActivatedRoute);
   readonly productService = inject(ProductService);
-  readonly http = inject(HttpClient);
+  readonly fb = inject(FormBuilder);
+  readonly util = inject(UtilService);
   ngOnInit() {
     this.ProdID = parseInt(this.route.snapshot.paramMap.get('ProdID'));
-    // this.setRating(this.rating);
-    this.canRate();
+    if (this.ProdID) {
+      this.canRate();
+      this.getRatings();
+    }
+  }
+
+  getRatings() {
+    this.productService.getProducReviews(this.ProdID).subscribe((res) => {
+      if (res) {
+        console.log(res);
+        this.ratingReviewList = res;
+      }
+    });
+  }
+
+  getImage(path: string):string {
+   return imageUrl+'/api/RatingReview/images/'+path
   }
   // Rating & Review
   setRating(rating) {
@@ -49,47 +71,58 @@ export class RatingReviewsComponent {
   canRate() {
     this.productService.canRate(this.ProdID).subscribe((res) => {
       this.canRateProduct = res ? res : false;
-      console.log(res);
+      if (this.canRateProduct) {
+        this.reviewForm = this.fb.group({
+          Product_ID: [this.ProdID, Validators.required],
+          User_ID: [localStorage.getItem('User_ID'), Validators.required],
+          Rating: [
+            this.rating,
+            [Validators.required, Validators.min(1), Validators.max(5)],
+          ],
+          Review_Text: [this.reviewText, Validators.required],
+        });
+      }
     });
   }
 
   onFileSelected(event: any): void {
-    if (event.target.files && event.target.files.length > 0) {
+    if (event.target.files) {
       this.files = Array.from(event.target.files);
-      console.log('Files selected:', this.files);
-    } else {
-      console.log('No files selected');
-      this.files = [];
     }
   }
-  
-  
 
-  submitReview() {
-    if (this.rating === 0 || !this.reviewText.trim()) {
-      alert('Please provide a rating and a review text.');
+  // Submit the review
+  submitReview(): void {
+    this.reviewForm.patchValue({
+      Product_ID: this.ProdID,
+      User_ID: localStorage.getItem('User_ID'),
+      Rating: this.rating,
+      Review_Text: this.reviewText,
+    });
+    debugger;
+    if (this.reviewForm.invalid) {
+     this.util.warn("Please fill all data");
       return;
     }
+    const reviewData = this.reviewForm.value;
 
-    const formData = new FormData();
-    formData.append('Product_ID', this.ProdID); 
-    formData.append('User_ID', localStorage.getItem('User_ID')); 
-    formData.append('Rating', this.rating.toString());
-    formData.append('Review_Text', this.reviewText);
-
-    this.files.forEach((file, index) => {
-      formData.append(`images[${index}]`, file, file.name);
+    this.productService.saveRatingAndReview(reviewData, this.files).subscribe({
+      next: (reviewId) => {
+       this.util.success("Review Added Successfully");
+        this.reviewForm.reset();
+        this.files = [];
+      },
+      error: (error) => {
+        console.error('Error submitting review:', error);
+        this.util.error("Failed to submit review. Please try again later");
+      },
     });
-
-    this.productService.saveRatingReview(formData).subscribe((res)=>{
-      console.log(res);
-      
-    })
   }
 
   resetForm() {
     this.rating = 0;
     this.reviewText = '';
     this.files = [];
+    this.reviewForm.reset();
   }
 }

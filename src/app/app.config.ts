@@ -10,4 +10,4 @@ export const appConfig: ApplicationConfig = {
 };
 
 export const apiUrl :string = 'http://localhost:5228';
-
+export const imageUrl:string = 'http://localhost:5228'

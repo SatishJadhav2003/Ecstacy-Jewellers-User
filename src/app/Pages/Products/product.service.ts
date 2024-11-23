@@ -93,8 +93,32 @@ export class ProductService {
     return this.apiService.get('api/RatingReview/CanUserRateProduct/'+User_ID+'/'+Product_ID);
   }
 
-  saveRatingReview(data:any)
+  getProducReviews(Product_ID:number):Observable<any[]>
   {
-    return this.apiService.postImage('api/RatingReview',data);
+    return this.apiService.get('api/RatingReview/'+Product_ID)
   }
+
+  saveRatingAndReview(reviewData: any, images: File[]): Observable<number> {
+    const formData = new FormData();
+
+    // Add review data to FormData
+    formData.append('Product_ID', reviewData.Product_ID);
+    formData.append('User_ID', reviewData.User_ID);
+    formData.append('Rating', reviewData.Rating.toString());
+    formData.append('Review_Text', reviewData.Review_Text);
+
+    // Add images to FormData
+    images.forEach((image, index) => {
+      formData.append('images', image, image.name);
+    });
+
+    // Call the API
+    return this.apiService.postImage('api/RatingReview', formData);
+  }
+
+  getReviewImage(imageUrl:string)
+  {
+    return this.apiService.get('api/RatingReview/images/'+imageUrl)
+  }
+
 }

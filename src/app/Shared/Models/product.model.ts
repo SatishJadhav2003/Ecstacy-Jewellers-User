@@ -6,6 +6,9 @@ export class Product {
   Price?: number;
   Stock_Quantity?: number;
   Quantity?: number;
+  Rating?:number;
+  Total_Ratings?:number;
+  Total_Reviews?:number;
   Weight?: number;
   Product_Image?: string;
   Is_Active?: boolean;

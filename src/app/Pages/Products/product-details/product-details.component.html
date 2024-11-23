@@ -65,16 +65,30 @@
       <div class="mt-4 text-red-600 text-2xl font-semibold">
         {{ product[0]?.Price | currency : "INR" : "symbol-narrow" : "4.2-2" }}
       </div>
+      @if (product[0] && product[0].Rating >0) {
       <div class="flex items-center mt-2 text-xs">
-        <span class="p-1 bg-green-500 rounded-md mr-2 text-white font-bold"
-          >4.6 <span class="text-white">★</span>
+        <span
+          class="p-1 rounded-md mr-2 text-white font-bold"
+          [ngClass]="
+            product[0].Rating > 3
+              ? 'bg-green-500'
+              : product[0].Rating > 1
+              ? 'bg-yellow-500'
+              : 'bg-red-500'
+          "
+          >{{ product[0].Rating }} <span class="text-white">★</span>
         </span>
         <span class="text-yellow-400">★★★★</span>
         <span class="text-gray-400">★</span>
+        @if (product[0].Total_Ratings) {
+
         <span class="text-gray-500 font-medium pl-2"
-          >(728 Ratings & 450 Reviews)</span
+          >({{ product[0].Total_Ratings }} Ratings &
+          {{ product[0].Total_Reviews }} Reviews)</span
         >
+        }
       </div>
+      }
 
       <div class="flex justify-around mt-6 text-sm">
         @for (item of product; track $index) {
@@ -102,14 +116,14 @@
       </div>
     </div>
     <hr />
-    <app-rating-reviews/>
+    <app-rating-reviews />
   </div>
 
-@if (isShareOpen) {
-<app-socialmedia (closeShare)="onShare()" />
-}
+  @if (isShareOpen) {
+  <app-socialmedia (closeShare)="onShare()" />
+  }
 
-<!-- <div class="text-center">
+  <!-- <div class="text-center">
           <span class="font-semibold">Qty</span><br />
           <div class="flex items-center pt-2">
             <button
@@ -126,7 +140,7 @@
           </div>
         </div> -->
 
-<!-- <div class="grid grid-cols-2 gap-4 mt-6">
+  <!-- <div class="grid grid-cols-2 gap-4 mt-6">
         <div>
           <label class="block text-sm font-semibold">Purity</label>
           <select class="w-full border border-gray-300 rounded-lg p-2 mt-1">
@@ -157,3 +171,4 @@
           />
         </div>
       </div> -->
+</div>

@@ -15,7 +15,7 @@ export class ApiRequestService {
   util = inject(UtilService);
 
   // Base URL for the API
-  private baseUrl = apiUrl;
+  public baseUrl = apiUrl;
 
   // Define common headers
   private headers = new HttpHeaders({
