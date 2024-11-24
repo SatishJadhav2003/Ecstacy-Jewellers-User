@@ -2,6 +2,7 @@
   <h2 class="text-xl font-bold text-yellow-800 flex justify-between mb-4 p-4">
     Ratings & Reviews
   </h2>
+
   @if (canRateProduct) {
   <div id="starRating" class="flex space-x-2 mb-4 p-4 justify-evenly">
     @for ( star of [1, 2, 3, 4, 5]; track $index) {
@@ -61,14 +62,17 @@
 <div
   class="w-full flex flex-row space-x-2 mb-4 p-4 border-b-2 border-solid border-[#f0f0f0]"
 >
-  @for (item of ratingReviewList; track $index) { @for (img of item.Images;
-  track $index) {
+  @for (img of imagesList; track $index) {
   <img
-    class="border-2 h-24 object-contain hover:cursor-pointer"
-    [src]="getImage(img)"
-  />} }
+    class="border-2 h-24 object-cover hover:cursor-pointer"
+    height="200"
+    width="80"
+    [ngSrc]="getImage(img)"
+    loading="lazy"
+    (click)="viewImages(-1,$index)"
+  />}
 </div>
-} @for (item of ratingReviewList; track $index) {
+@for (item of ratingReviewList; track $index;let i=$index) {
 <div class="border-b-2 border-solid border-[#f0f0f0] p-4">
   <h3 class="flex flex-row font-medium">
     <div class="flex items-center text-xs">
@@ -91,10 +95,11 @@
   </p>
 
   <div class="flex flex-row w-full space-x-2 mb-4 float-left">
-    @for (img of item.Images; track $index) {
+    @for (img of item.Images; track img;let j=$index) {
     <img
       class="border-2 h-24 object-contain hover:cursor-pointer"
       [src]="getImage(img)"
+      (click)="viewImages(i,j)"
     />}
   </div>
   <div class="text-sm text-[#878787]">
@@ -102,4 +107,6 @@
     <span> {{ item.Review_Date | date : "dd-MMM-yyyy" }}</span>
   </div>
 </div>
+} } @if (showImages) {
+<app-image-gallery [images]="imagesToshow" [focusIndex]="focusIndex" (newItemEvent)="showImages =false" />
 }

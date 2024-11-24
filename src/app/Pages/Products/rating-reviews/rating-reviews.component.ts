@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductService } from '../product.service';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import {
   FormBuilder,
   FormGroup,
@@ -10,10 +10,11 @@ import {
 } from '@angular/forms';
 import { imageUrl } from '../../../app.config';
 import { UtilService } from '../../../Services/util.service';
+import { ImageGalleryComponent } from '../../Other/image-gallery/image-gallery.component';
 @Component({
   selector: 'app-rating-reviews',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, NgOptimizedImage, ImageGalleryComponent],
   templateUrl: './rating-reviews.component.html',
   styleUrl: './rating-reviews.component.css',
 })
@@ -26,7 +27,11 @@ export class RatingReviewsComponent {
   files: File[] = [];
   ratingLabels = ['Hated it', "Didn't Like", 'Was Ok', 'Liked', 'Loved it'];
   reviewForm: FormGroup;
-
+  // Images
+  imagesList: any[] = [];
+  showImages: boolean = false;
+  imagesToshow: any[] = [];
+  focusIndex: number = 0;
   // Dependecies
   readonly route = inject(ActivatedRoute);
   readonly productService = inject(ProductService);
@@ -43,14 +48,14 @@ export class RatingReviewsComponent {
   getRatings() {
     this.productService.getProducReviews(this.ProdID).subscribe((res) => {
       if (res) {
-        console.log(res);
         this.ratingReviewList = res;
+        this.extractAllImages();
       }
     });
   }
 
-  getImage(path: string):string {
-   return imageUrl+'/api/RatingReview/images/'+path
+  getImage(path: string): string {
+    return imageUrl + '/api/RatingReview/images/' + path;
   }
   // Rating & Review
   setRating(rating) {
@@ -101,20 +106,20 @@ export class RatingReviewsComponent {
     });
     debugger;
     if (this.reviewForm.invalid) {
-     this.util.warn("Please fill all data");
+      this.util.warn('Please fill all data');
       return;
     }
     const reviewData = this.reviewForm.value;
 
     this.productService.saveRatingAndReview(reviewData, this.files).subscribe({
       next: (reviewId) => {
-       this.util.success("Review Added Successfully");
-        this.reviewForm.reset();
+        this.util.success('Review Added Successfully');
+        this.resetForm();
         this.files = [];
       },
       error: (error) => {
         console.error('Error submitting review:', error);
-        this.util.error("Failed to submit review. Please try again later");
+        this.util.error('Failed to submit review. Please try again later');
       },
     });
   }
@@ -124,5 +129,38 @@ export class RatingReviewsComponent {
     this.reviewText = '';
     this.files = [];
     this.reviewForm.reset();
+  }
+
+  // Images
+  extractAllImages() {
+    this.imagesList = this.ratingReviewList.reduce((acc, item) => {
+      // Check if item.Images exists and is an array
+      if (Array.isArray(item.Images)) {
+        // Concatenate all images into the accumulator
+        return acc.concat(item.Images);
+      }
+      return acc;
+    }, []);
+
+    console.log(this.imagesList); // Optionally, log to see the result
+  }
+
+  viewImages(index, focus) {
+    this.imagesToshow = [];
+    if (index == -1) {
+      this.imagesToshow = this.imagesList;
+    } else {
+      const temp = [this.ratingReviewList[index]];
+      this.imagesToshow = temp.reduce((acc, item) => {
+        // Check if item.Images exists and is an array
+        if (Array.isArray(item.Images)) {
+          // Concatenate all images into the accumulator
+          return acc.concat(item.Images);
+        }
+        return acc;
+      }, []);
+    }
+    this.focusIndex = focus;
+    this.showImages = true;
   }
 }
