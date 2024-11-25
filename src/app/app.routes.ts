@@ -59,5 +59,12 @@ export const routes: Routes = [
     import('./Pages/Other/customize-jewellery/customize-jewellery.component').then(
       (m) => m.CustomizeJewelleryComponent
     ),
+  },
+  {
+    path:'search',
+    loadComponent: () =>
+    import('./Pages/Other/search/search.component').then(
+      (m) => m.SearchComponent
+    ),
   }
 ];

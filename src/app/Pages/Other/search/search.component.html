@@ -1,0 +1,15 @@
+@if (searchList?.length >0) {
+<div
+  class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 2xl:grid-cols-5 p-6 justify-items-center"
+>
+  @for (item of searchList; track $index) {
+  <app-product-card [productData]="item" />
+  }
+</div>
+}@else {
+<div class="row">
+  <div class="col-md-12 flex w-full justify-center p-14">
+    <h4>No Search Results Found : {{ searchText }}</h4>
+  </div>
+</div>
+}
