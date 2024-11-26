@@ -3,6 +3,7 @@ import { Observable, of } from 'rxjs';
 import { Category } from '../../Shared/Models/Category';
 import { Banner } from './sliders/banner.model';
 import { ApiRequestService } from '../../Services/api-request.service';
+import { Metal } from '../../Shared/Models/Metal';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +20,11 @@ export class StartupService {
 
   getCategories(): Observable<Category[]> {
     return this.apiRequest.get('api/category');
+  }
+
+  getMetalList():Observable<Metal[]>
+  {
+return this.apiRequest.get('api/Metal');
   }
 
   getFeatureCategory(): Observable<Category> {

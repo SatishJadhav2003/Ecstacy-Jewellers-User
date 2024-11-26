@@ -66,5 +66,12 @@ export const routes: Routes = [
     import('./Pages/Other/search/search.component').then(
       (m) => m.SearchComponent
     ),
+  },
+  {
+    path:'filter',
+    loadComponent: () =>
+    import('./Pages/Other/filters/filters.component').then(
+      (m) => m.FiltersComponent
+    ),
   }
 ];

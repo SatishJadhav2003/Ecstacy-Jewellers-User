@@ -1,0 +1,39 @@
+<div class="p-6 max-w-screen-lg mx-auto h-full">
+    <div class="grid grid-cols-4 gap-6">
+      <!-- Loop through columns dynamically -->
+      @for (col of filterColumns; track $index) {
+      <div  class="space-y-4">
+        <h2 class="text-lg font-bold text-gold-500">{{ col.title }}</h2>
+        <div class="space-y-2">
+          <!-- Loop through filter items dynamically -->
+          @for (item of  col.items; track $index) {
+          <div  class="flex items-center space-x-2">
+            <input
+              type="checkbox"
+              [id]="item.id"
+              [(ngModel)]="item.checked"
+              class="h-5 w-5 text-gold border-gray-300 rounded"
+            />
+            <label
+              [for]="item.id"
+              class="text-sm text-gray-700"
+            >
+              {{ item.label }}
+            </label>
+          </div>
+        }
+        </div>
+      </div>
+    }
+    </div>
+  
+    <div class="mt-6 text-center">
+      <button
+        (click)="applyFilters()"
+        class="px-6 py-2 bg-gold-400 text-white font-semibold rounded shadow-md hover:bg-gold-dark"
+      >
+        Apply Filter
+      </button>
+    </div>
+  </div>
+  

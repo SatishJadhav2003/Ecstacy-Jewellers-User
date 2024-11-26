@@ -1,6 +1,9 @@
 <nav class="bg-white shadow-md px-4 py-2 flex items-center top-0 sticky z-10">
   <!-- Logo Section -->
-  <div (click)="navigateTo('home')" class="flex pl-2 items-center space-x-2 hover:cursor-pointer" >
+  <div
+    (click)="navigateTo('home')"
+    class="flex pl-2 items-center space-x-2 hover:cursor-pointer"
+  >
     <img src="icons/logogold-hr.png" alt="Logo" class="h-16 w-auto" />
     <!-- <span class="text-lg font-bold text-gray-900">Jewels EsClassy</span> -->
   </div>
@@ -49,7 +52,11 @@
       </div>
     </div>
 
-    <li class="hover:cursor-pointer" ><a  (click)="navigateTo('contactus')" class="hover:text-gold-700">Contact Us</a></li>
+    <li class="hover:cursor-pointer">
+      <a (click)="navigateTo('contactus')" class="hover:text-gold-700"
+        >Contact Us</a
+      >
+    </li>
   </ul>
 
   <!-- Search and Icons Section -->
@@ -90,8 +97,8 @@
     <div class="flex space-x-4">
       <!-- Filter -->
       <a
-        href="#"
-        class="text-gold-500 hover:text-gold-600 flex flex-col items-center"
+        (click)="onFilter()"
+        class="text-gold-500 hover:text-gold-600 flex flex-col items-center cursor-pointer"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -112,7 +119,7 @@
 
       <!-- Wishlist -->
       <a
-      (click)="navigateTo('user/wishlist')"
+        (click)="navigateTo('user/wishlist')"
         class="text-gold-500 hover:text-gold-600 flex flex-col items-center hover:cursor-pointer"
       >
         <svg
@@ -180,9 +187,7 @@
 </nav>
 @if (auth.RegistrationModalOpen()) {
 <app-register />
-} 
-
-@if (auth.LoginModalOpen()) {
-  <h2>hello</h2>
+} @if (auth.LoginModalOpen()) {
+<h2>hello</h2>
 <app-login />
 }

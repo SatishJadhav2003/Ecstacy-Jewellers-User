@@ -7,7 +7,7 @@ import { StartupService } from '../startup.service';
 import { AuthService } from '../../../Authentication/auth.service';
 import { LoginComponent } from '../../../Authentication/login/login.component';
 import { RegisterComponent } from '../../../Authentication/register/register.component';
-import { Router, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { SearchService } from '../../../Shared/Services/search.service';
 @Component({
@@ -43,6 +43,7 @@ export class NavbarComponent {
   util = inject(UtilService);
   startupService = inject(StartupService);
   router = inject(Router);
+  route = inject(ActivatedRoute);
   searchService = inject(SearchService);
   constructor() {
     this.auth.IsLoggedIn();
@@ -71,8 +72,8 @@ export class NavbarComponent {
     this.startupService.getCategories().subscribe(
       (data) => {
         if (data) {
-          // this.Categories = data;
-          // this.totalCategories = this.Categories.length;
+          this.Categories = data;
+          this.totalCategories = this.Categories.length;
         }
       },
       (err) => {
@@ -104,5 +105,12 @@ export class NavbarComponent {
     this.router.navigate(['/search'], {
       queryParams: { text: this.searchText },
     });
+  }
+
+  onFilter() {
+    console.log(this.router.url);
+    console.log(this.route.snapshot.params);
+
+    this.router.navigate(['/filter'], { relativeTo: this.route });
   }
 }
