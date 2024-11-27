@@ -16,6 +16,7 @@ import { ProductCardComponent } from '../../Products/product-card/product-card.c
 export class SearchComponent implements OnInit, OnDestroy {
   searchText: string = '';
   searchList: Product[] = [];
+  filters:any;
   private readonly destroy$ = new Subject<void>();
 
   readonly route = inject(ActivatedRoute);
@@ -32,6 +33,8 @@ export class SearchComponent implements OnInit, OnDestroy {
           this.getSearchProducts();
         }
       });
+      this.filters = localStorage.getItem('filters');
+    console.log(this.filters);
   }
 
   getSearchProducts() {
@@ -46,5 +49,6 @@ export class SearchComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.destroy$.next();
     this.destroy$.complete();
+    localStorage.removeItem('filters');
   }
 }
