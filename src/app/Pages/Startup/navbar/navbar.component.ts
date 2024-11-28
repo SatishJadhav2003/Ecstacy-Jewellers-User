@@ -9,7 +9,7 @@ import { LoginComponent } from '../../../Authentication/login/login.component';
 import { RegisterComponent } from '../../../Authentication/register/register.component';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { SearchService } from '../../../Shared/Services/search.service';
+import { SearchService } from '../../../Services/search.service';
 @Component({
   selector: 'app-navbar',
   standalone: true,

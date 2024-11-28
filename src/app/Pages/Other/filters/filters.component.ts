@@ -23,51 +23,29 @@ export class FiltersComponent {
   selectedGenders: string[] = [];
   PriceBand: any[] = [
     {
-      Value: 25000,
-      Label: 'below 25K',
+      Min:0,
+      Max: 25000,
+      Label: '0-25K',
     },
     {
-      Value: 50000,
+      Min:25000,
+      Max: 50000,
       Label: '25K-50K',
     },
     {
-      Value: 100000,
+      Min:50000,     
+      Max: 100000,
       Label: '50K-1L',
     },
     {
-      Value: 1000000,
-      Label: 'Above 10L',
+      Min:100000,
+      Max: 10000000,
+      Label: '1L+',
     },
   ];
+  selectedPrice:any[]=[];
 
-  filterColumns = [
-    {
-      title: 'All Jewelry',
-      items: [],
-    },
-    {
-      title: 'Metal',
-      items: [],
-    },
-    {
-      title: 'Gender',
-      items: [
-        { id: 1, label: 'Male', checked: false },
-        { id: 2, label: 'Female', checked: false },
-        { id: 3, label: 'Kids & Teenage', checked: false },
-      ],
-    },
-    {
-      title: 'Price Band',
-      items: [
-        { id: 1, label: '<25K', checked: false },
-        { id: 2, label: '25K - 50K', checked: false },
-        { id: 3, label: '50K - 1L', checked: false },
-        { id: 4, label: '1L & Above', checked: false },
-      ],
-    },
-  ];
-
+  
   readonly startupService = inject(StartupService);
   readonly router = inject(Router);
   readonly util = inject(UtilService);
@@ -89,25 +67,6 @@ export class FiltersComponent {
         console.error('Error fetching categories:', error);
       }
     );
-    // this.startupService
-    //   .getCategories()
-    //   .pipe(
-    //     map((categories: any[]) =>
-    //       categories.map((category) => ({
-    //         id:category.Category_ID,
-    //         label:category.Category_Name,
-    //         checked: false, // Add the checked flag
-    //       }))
-    //     )
-    //   )
-    //   .subscribe(
-    //     (modifiedCategories) => {
-    //       this.filterColumns[0].items = modifiedCategories;
-    //     },
-    //     (error) => {
-    //       console.error('Error fetching categories:', error);
-    //     }
-    //   );
   }
 
   selectCate(CateID: any) {
@@ -124,6 +83,7 @@ export class FiltersComponent {
     return this.selectedCategories.includes(CateID); // Check existence
   }
   
+  // Metal Start
   loadMetal() {
     this.startupService.getMetalList().subscribe(
       (res) => {
@@ -149,19 +109,51 @@ export class FiltersComponent {
   MetalSelected(MetalID: any): boolean {
     return this.selectedMetals.includes(MetalID); // Check existence
   }
+
+  // gender start
+  selectGender(gender: any) {
+    const temp = this.selectedGenders.findIndex((item) => item === gender);
+    if (temp !== -1) {
+      this.selectedGenders.splice(temp, 1); // Remove if exists
+    } else {
+      this.selectedGenders.push(gender); // Add if not exists
+    }
+    console.log(this.selectedGenders);
+  }
+  
+  GenderSelected(gender: any): boolean {
+    return this.selectedGenders.includes(gender); // Check existence
+  }
+
+  // Price band
+  selectPrice(min: number,max:number) {
+    const temp = this.selectedPrice.findIndex((item) => item === min);
+    if (temp !== -1) {
+      this.selectedPrice.splice(temp, 1); // Remove if exists
+    } else {
+      this.selectedPrice.push(min); // Add if not exists
+    }
+    console.log(this.selectedPrice);
+  }
+  
+  PriceSelected(min: any): boolean {
+    return this.selectedPrice.includes(min); // Check existence
+  }
   
   applyFilters() {
-    const selectedFilters = this.filterColumns.map((column) =>
-      column.items.filter((item) => item.checked).map((item) => item.id)
-    );
-    console.log('Applied Filters:', selectedFilters);
+    // const selectedFilters = this.filterColumns.map((column) =>
+    //   column.items.filter((item) => item.checked).map((item) => item.id)
+    // );
+    // console.log('Applied Filters:', selectedFilters);
     const temp = {
-      category: selectedFilters[0],
-      metal: selectedFilters[1],
-      gender: selectedFilters[2],
-      price: selectedFilters[3],
+      category: this.selectedCategories,
+      metal: this.selectedMetals,
+      gender: this.selectedGenders,
+      price: this.selectedPrice,
     };
     localStorage.setItem('filters', JSON.stringify(temp));
     this.router.navigate(['search']);
   }
+
+
 }

@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
-import { ApiRequestService } from '../../Services/api-request.service';
+import { ApiRequestService } from './api-request.service';
 import { Observable, Subject } from 'rxjs';
-import { Product } from '../Models/product.model';
+import { Product } from '../Shared/Models/product.model';
 
 @Injectable({
   providedIn: 'root',
@@ -12,5 +12,10 @@ export class SearchService {
 
   searchSuggestions(query):Observable<Product[]> {
     return this.apiRequest.get('api/product/suggestions/'+query);
+  }
+
+  getFilteredData(filters)
+  {
+    return this.apiRequest.post('api/product/GetFiltered',filters);
   }
 }

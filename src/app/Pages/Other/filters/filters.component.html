@@ -1,59 +1,89 @@
 <div class="p-6 max-w-screen-lg mx-auto h-full">
-    <div class="grid grid-cols-4 gap-6">
-      <!-- Category -->
-      <div  class="space-y-4">
-        <h2 class="text-lg font-bold text-gold-500">All Jewelry</h2>
-        <div class="space-y-2">
-          <!-- Loop through filter items dynamically -->
-          @for (item of  categories; track $index) {
-          <div  class="flex items-center space-x-2">
-            <input
-              type="checkbox"
-              (change)="selectCate(item.Category_ID)"
-              (selected)="cateSelected(item.Category_ID)"
-              class="h-5 w-5 text-gold border-gray-300 rounded"
-            />
-            <label
-              [for]="item.Category_ID"
-              class="text-sm text-gray-700"
-            >
-              {{ item.Category_Name }}
-            </label>
-          </div>
-        }
+  <div class="grid grid-cols-4 gap-6">
+    <!-- Category -->
+    <div class="space-y-4">
+      <h2 class="text-lg font-bold text-gold-500">All Jewelry</h2>
+      <div class="space-y-2">
+        <!-- Loop through filter items dynamically -->
+        @for (item of categories; track $index) {
+        <div class="flex items-center space-x-2">
+          <input
+            type="checkbox"
+            (change)="selectCate(item.Category_ID)"
+            (selected)="cateSelected(item.Category_ID)"
+            class="h-5 w-5 text-gold border-gray-300 rounded"
+          />
+          <label [for]="item.Category_ID" class="text-sm text-gray-700">
+            {{ item.Category_Name }}
+          </label>
         </div>
-      </div>
-      <div  class="space-y-4">
-        <h2 class="text-lg font-bold text-gold-500">Metal</h2>
-        <div class="space-y-2">
-          <!-- Loop through filter items dynamically -->
-          @for (item of  metals; track $index) {
-          <div  class="flex items-center space-x-2">
-            <input
-              type="checkbox"
-              (change)="selectMetal(item.Metal_ID)"
-              (selected)="MetalSelected(item.Metal_ID)"
-              class="h-5 w-5 text-gold border-gray-300 rounded"
-            />
-            <label
-              [for]="item.Metal_ID"
-              class="text-sm text-gray-700"
-            >
-              {{ item.Metal_Name }}
-            </label>
-          </div>
         }
-        </div>
       </div>
     </div>
-  
-    <div class="mt-6 text-center">
-      <button
-        (click)="applyFilters()"
-        class="px-6 py-2 bg-gold-400 text-white font-semibold rounded shadow-md hover:bg-gold-dark"
-      >
-        Apply Filter
-      </button>
+    <div class="space-y-4">
+      <h2 class="text-lg font-bold text-gold-500">Metal</h2>
+      <div class="space-y-2">
+        <!-- Loop through filter items dynamically -->
+        @for (item of metals; track $index) {
+        <div class="flex items-center space-x-2">
+          <input
+            type="checkbox"
+            (change)="selectMetal(item.Metal_ID)"
+            (selected)="MetalSelected(item.Metal_ID)"
+            class="h-5 w-5 text-gold border-gray-300 rounded"
+          />
+          <label [for]="item.Metal_ID" class="text-sm text-gray-700">
+            {{ item.Metal_Name }}
+          </label>
+        </div>
+        }
+      </div>
+    </div>
+    <div class="space-y-4">
+      <h2 class="text-lg font-bold text-gold-500">Gender</h2>
+      <div class="space-y-2">
+        <!-- Loop through filter items dynamically -->
+        @for (item of Genders; track $index) {
+        <div class="flex items-center space-x-2">
+          <input
+            type="checkbox"
+            (change)="selectGender(item)"
+            (selected)="GenderSelected(item)"
+            class="h-5 w-5 text-gold border-gray-300 rounded"
+          />
+          <label [for]="item" class="text-sm text-gray-700">
+            {{ item }}
+          </label>
+        </div>
+        }
+      </div>
+    </div>
+    <div class="space-y-4">
+      <h2 class="text-lg font-bold text-gold-500">Price Band</h2>
+      <div class="space-y-2">
+        <!-- Loop through filter items dynamically -->
+        @for (item of PriceBand; track $index) {
+        <div class="flex items-center space-x-2">
+          <input
+            type="checkbox"
+            (change)="selectPrice(item.Min,item.Max)"
+            (selected)="selectPrice(item.Min,item.Max)"
+            class="h-5 w-5 text-gold border-gray-300 rounded"
+          />
+          <label class="text-sm text-gray-700">
+            {{ item.Label }}
+          </label>
+        </div>
+        }
+      </div>
     </div>
   </div>
-  
+  <div class="mt-6 text-center">
+    <button
+      (click)="applyFilters()"
+      class="px-6 py-2 bg-gold-400 text-white font-semibold rounded shadow-md hover:bg-gold-dark"
+    >
+      Apply Filter
+    </button>
+  </div>
+</div>
