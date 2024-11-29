@@ -10,7 +10,7 @@
           <input
             type="checkbox"
             (change)="selectCate(item.Category_ID)"
-            (selected)="cateSelected(item.Category_ID)"
+            [checked]="cateSelected(item.Category_ID)"
             class="h-5 w-5 text-gold border-gray-300 rounded"
           />
           <label [for]="item.Category_ID" class="text-sm text-gray-700">
@@ -29,7 +29,7 @@
           <input
             type="checkbox"
             (change)="selectMetal(item.Metal_ID)"
-            (selected)="MetalSelected(item.Metal_ID)"
+            [checked]="MetalSelected(item.Metal_ID)"
             class="h-5 w-5 text-gold border-gray-300 rounded"
           />
           <label [for]="item.Metal_ID" class="text-sm text-gray-700">
@@ -48,7 +48,7 @@
           <input
             type="checkbox"
             (change)="selectGender(item)"
-            (selected)="GenderSelected(item)"
+            [checked]="GenderSelected(item)"
             class="h-5 w-5 text-gold border-gray-300 rounded"
           />
           <label [for]="item" class="text-sm text-gray-700">
@@ -67,7 +67,7 @@
           <input
             type="checkbox"
             (change)="selectPrice(item.Min,item.Max)"
-            (selected)="selectPrice(item.Min,item.Max)"
+            [checked]="PriceSelected(item.Min)"
             class="h-5 w-5 text-gold border-gray-300 rounded"
           />
           <label class="text-sm text-gray-700">

@@ -23,35 +23,41 @@ export class FiltersComponent {
   selectedGenders: string[] = [];
   PriceBand: any[] = [
     {
-      Min:0,
+      Min: 0,
       Max: 25000,
       Label: '0-25K',
     },
     {
-      Min:25000,
+      Min: 25000,
       Max: 50000,
       Label: '25K-50K',
     },
     {
-      Min:50000,     
+      Min: 50000,
       Max: 100000,
       Label: '50K-1L',
     },
     {
-      Min:100000,
+      Min: 100000,
       Max: 10000000,
       Label: '1L+',
     },
   ];
-  selectedPrice:any[]=[];
+  selectedPrice: any[] = [];
 
-  
   readonly startupService = inject(StartupService);
   readonly router = inject(Router);
   readonly util = inject(UtilService);
   ngOnInit() {
     this.loadCategories();
     this.loadMetal();
+    const temp = JSON.parse(localStorage.getItem('filters'));
+    if (temp) {
+      this.selectedCategories = temp.category ?? [];
+      this.selectedMetals = temp.metal ?? [];
+      this.selectedGenders = temp.gender ?? [];
+      this.selectedPrice = temp.price ?? [];
+    }
   }
 
   loadCategories() {
@@ -78,11 +84,11 @@ export class FiltersComponent {
     }
     console.log(this.selectedCategories);
   }
-  
+
   cateSelected(CateID: any): boolean {
     return this.selectedCategories.includes(CateID); // Check existence
   }
-  
+
   // Metal Start
   loadMetal() {
     this.startupService.getMetalList().subscribe(
@@ -105,7 +111,7 @@ export class FiltersComponent {
     }
     console.log(this.selectedMetals);
   }
-  
+
   MetalSelected(MetalID: any): boolean {
     return this.selectedMetals.includes(MetalID); // Check existence
   }
@@ -120,13 +126,13 @@ export class FiltersComponent {
     }
     console.log(this.selectedGenders);
   }
-  
+
   GenderSelected(gender: any): boolean {
     return this.selectedGenders.includes(gender); // Check existence
   }
 
   // Price band
-  selectPrice(min: number,max:number) {
+  selectPrice(min: number, max: number) {
     const temp = this.selectedPrice.findIndex((item) => item === min);
     if (temp !== -1) {
       this.selectedPrice.splice(temp, 1); // Remove if exists
@@ -135,11 +141,11 @@ export class FiltersComponent {
     }
     console.log(this.selectedPrice);
   }
-  
+
   PriceSelected(min: any): boolean {
     return this.selectedPrice.includes(min); // Check existence
   }
-  
+
   applyFilters() {
     // const selectedFilters = this.filterColumns.map((column) =>
     //   column.items.filter((item) => item.checked).map((item) => item.id)
@@ -155,5 +161,7 @@ export class FiltersComponent {
     this.router.navigate(['search']);
   }
 
-
+  clearFilters() {
+    localStorage.removeItem('filters');
+  }
 }

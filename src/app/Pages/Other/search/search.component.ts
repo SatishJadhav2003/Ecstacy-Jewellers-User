@@ -31,15 +31,15 @@ export class SearchComponent implements OnInit, OnDestroy {
         if (this.searchText) {
           this.searchService.searchQuery.next(this.searchText);
           this.getSearchProducts();
+        } else {
+          this.filters = JSON.parse(localStorage.getItem('filters'));
+          console.log(this.filters);
+
+          if (this.filters) {
+            this.getFilteredData();
+          }
         }
       });
-    this.filters = JSON.parse(localStorage.getItem('filters'));
-    console.log(this.filters);
-    localStorage.removeItem('filters');
-    if(this.filters)
-    {
-      this.getFilteredData();
-    }
   }
 
   // Search functionality
@@ -54,20 +54,20 @@ export class SearchComponent implements OnInit, OnDestroy {
 
   // Filter functionality
   getFilteredData() {
-    const temp ={
-      Category : this.filters[0],
-      Metal : this.filters[1],
-      Gender : this.filters[2],
-      Price : this.filters[3],
-    }
+    const temp = {
+      Category: this.filters[0],
+      Metal: this.filters[1],
+      Gender: this.filters[2],
+      Price: this.filters[3],
+    };
     this.searchService.getFilteredData(this.filters).subscribe((res) => {
       console.log(res);
+      this.searchList = res;
     });
   }
 
   ngOnDestroy() {
     this.destroy$.next();
     this.destroy$.complete();
-    localStorage.removeItem('filters');
   }
 }
