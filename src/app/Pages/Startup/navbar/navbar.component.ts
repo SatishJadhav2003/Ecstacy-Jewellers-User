@@ -38,6 +38,7 @@ export class NavbarComponent {
   currentIndex: number = 0;
   currentTitle: string = this.searchTitles[this.currentIndex];
   searchText: string = '';
+  isMenuOpen:boolean =false
   // Import Services
   auth = inject(AuthService);
   util = inject(UtilService);

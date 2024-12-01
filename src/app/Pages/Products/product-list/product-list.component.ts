@@ -23,7 +23,7 @@ export class ProductListComponent {
     window.scrollTo(0, 200);
     this.cateID = this.route.snapshot.paramMap.get('CateID');
     console.log(this.cateID);
-    this.categoryImage = localStorage.getItem('CateImage');
+    this.categoryImage = localStorage.getItem('CateImage')??"";
     this.productService.getProductsList(this.cateID).subscribe((data) => {
       this.productList = data;
     });

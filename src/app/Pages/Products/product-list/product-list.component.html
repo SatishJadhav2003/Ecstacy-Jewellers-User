@@ -1,12 +1,15 @@
+@if (categoryImage?.length >0) {
 <div class="w-screen h-screen overflow-hidden relative">
   <div class="absolute flex w-full h-full">
-    <div class="w-screen  flex items-center justify-center">
+    <div class="w-screen flex items-center justify-center">
       <img class="w-screen h-24 object-contain" [src]="categoryImage" alt="" />
     </div>
   </div>
 </div>
-
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 2xl:grid-cols-5 p-6 justify-items-center">
+}
+<div
+  class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 2xl:grid-cols-5 p-6 justify-items-center"
+>
   @for (item of productList; track $index) {
   <app-product-card [productData]="item" />
   }

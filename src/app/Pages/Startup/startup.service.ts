@@ -4,6 +4,7 @@ import { Category } from '../../Shared/Models/Category';
 import { Banner } from './sliders/banner.model';
 import { ApiRequestService } from '../../Services/api-request.service';
 import { Metal } from '../../Shared/Models/Metal';
+import { Product } from '../../Shared/Models/product.model';
 
 @Injectable({
   providedIn: 'root'
@@ -27,7 +28,7 @@ export class StartupService {
 return this.apiRequest.get('api/Metal');
   }
 
-  getFeatureCategory(): Observable<Category> {
+  getFeatureCategory(): Observable<Product[]> {
     const response: Category = {
       Category_ID: 0,
       Category_Name: 'Gold Coin',
@@ -60,6 +61,6 @@ return this.apiRequest.get('api/Metal');
         },
       ]
     }
-    return of(response);
+    return this.apiRequest.get('api/category/GetFeaturedCategory');
   }
 }

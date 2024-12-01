@@ -20,4 +20,6 @@ export class Product {
   Title?:string;
   Dim_Desc?:string;
 
+  // category
+  Category_Name?:string;
 }
