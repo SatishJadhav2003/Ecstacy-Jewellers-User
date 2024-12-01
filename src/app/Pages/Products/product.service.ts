@@ -6,6 +6,7 @@ import { Product_Images } from '../../Shared/Models/ProductImages';
 import { Cart, CartOutput } from '../../Shared/Models/Cart';
 import { Wishlist, WishlistOutput } from '../../Shared/Models/Wishlist';
 import { Watchlist, WatchlistOutput } from '../../Shared/Models/Watchlist';
+import { Category } from '../../Shared/Models/Category';
 
 @Injectable({
   providedIn: 'root',
@@ -14,6 +15,11 @@ export class ProductService {
   readonly apiService = inject(ApiRequestService);
   constructor() {}
 
+  // Categories
+  getCategoryByID(Category_ID: number): Observable<Category[]> {
+    return this.apiService.get('GetCategoryByID/' + Category_ID);
+  }
+  // Products
   getProductsList(Category_ID: any): Observable<Product[]> {
     return this.apiService.get('api/product/ByCatgory/' + Category_ID);
   }
@@ -27,7 +33,7 @@ export class ProductService {
   }
 
   // Cart section start
-  
+
   addToCart(data: Cart) {
     return this.apiService.post('api/cart', data);
   }
@@ -44,11 +50,11 @@ export class ProductService {
     return this.apiService.delete('api/cart/' + Cart_ID);
   }
 
-  incrementQty(Cart_ID:number) {
+  incrementQty(Cart_ID: number) {
     return this.apiService.post('api/cart/increment', Cart_ID);
   }
 
-  decrementQty(Cart_ID:number) {
+  decrementQty(Cart_ID: number) {
     return this.apiService.post('api/cart/decrement', Cart_ID);
   }
 
@@ -87,15 +93,15 @@ export class ProductService {
   }
 
   // Rating & reviews
-  canRate(Product_ID:number):Observable<boolean>
-  {
+  canRate(Product_ID: number): Observable<boolean> {
     const User_ID = parseInt(localStorage.getItem('User_ID'));
-    return this.apiService.get('api/RatingReview/CanUserRateProduct/'+User_ID+'/'+Product_ID);
+    return this.apiService.get(
+      'api/RatingReview/CanUserRateProduct/' + User_ID + '/' + Product_ID
+    );
   }
 
-  getProducReviews(Product_ID:number):Observable<any[]>
-  {
-    return this.apiService.get('api/RatingReview/'+Product_ID)
+  getProducReviews(Product_ID: number): Observable<any[]> {
+    return this.apiService.get('api/RatingReview/' + Product_ID);
   }
 
   saveRatingAndReview(reviewData: any, images: File[]): Observable<number> {
@@ -116,9 +122,7 @@ export class ProductService {
     return this.apiService.postImage('api/RatingReview', formData);
   }
 
-  getReviewImage(imageUrl:string)
-  {
-    return this.apiService.get('api/RatingReview/images/'+imageUrl)
+  getReviewImage(imageUrl: string) {
+    return this.apiService.get('api/Common/images/' + imageUrl);
   }
-
 }

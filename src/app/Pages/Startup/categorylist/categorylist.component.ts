@@ -22,6 +22,7 @@ export class CategorylistComponent {
   }
 
   onCategory(category:Category) {
+    localStorage.setItem('CateImage',category.Category_Image);
     this.router.navigate(['product-list/'+category.Category_ID]);
   }
 }
