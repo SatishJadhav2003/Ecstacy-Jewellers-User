@@ -73,5 +73,12 @@ export const routes: Routes = [
     import('./Pages/Other/filters/filters.component').then(
       (m) => m.FiltersComponent
     ),
+  },
+  {
+    path:'allproducts',
+    loadComponent: () =>
+    import('./Pages/Startup/all-products/all-products.component').then(
+      (m) => m.AllProductsComponent
+    ),
   }
 ];

@@ -13,25 +13,22 @@
     <li><a routerLink="" class="hover:text-gold-700">Home</a></li>
 
     <div
-      mndropdown
-      [placement]="'left'"
       class="relative flex items-center dropdown h-header"
     >
       <button
-        mndropdownToggle
+        (click)="navigateTo('allproducts')"
         type="button"
         id="notificationDropdown"
         data-bs-toggle="dropdown"
       >
         Product
       </button>
-      <div
+      <!-- <div
         mndropdownMenu
         class="absolute z-50 text-left bg-white rounded-md shadow-md !top-12 dropdown-menu w-max"
         aria-labelledby="notificationDropdown"
       >
         <div class="gap-12 p-6 flex">
-          <!-- All Jewelry Column -->
           @for (item of Categories; track $index) {
           <div class="space-y-2">
             <h3 class="font-semibold text-gold-500">
@@ -49,7 +46,7 @@
           </div>
           }
         </div>
-      </div>
+      </div> -->
     </div>
 
     <li class="hover:cursor-pointer">

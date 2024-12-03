@@ -7,13 +7,12 @@ import { Metal } from '../../Shared/Models/Metal';
 import { Product } from '../../Shared/Models/product.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class StartupService {
-  apiRequest = inject(ApiRequestService)
+  apiRequest = inject(ApiRequestService);
   Categories: WritableSignal<Category[]> = signal([]);
-  constructor() { }
-
+  constructor() {}
 
   getBannerList(): Observable<Banner[]> {
     return this.apiRequest.get('api/banner');
@@ -23,9 +22,8 @@ export class StartupService {
     return this.apiRequest.get('api/category');
   }
 
-  getMetalList():Observable<Metal[]>
-  {
-return this.apiRequest.get('api/Metal');
+  getMetalList(): Observable<Metal[]> {
+    return this.apiRequest.get('api/Metal');
   }
 
   getFeatureCategory(): Observable<Product[]> {
@@ -37,30 +35,35 @@ return this.apiRequest.get('api/Metal');
         {
           Sub_Cate_ID: 1,
           Sub_Cate_Name: 'Buiscute',
-          Sub_Cate_Image: 'images/subcategories/buiscut.jpg'
-        }, {
-          Sub_Cate_ID: 1,
-          Sub_Cate_Name: 'Bullion Coins',
-          Sub_Cate_Image: 'images/subcategories/bullion.png'
-        }, {
-          Sub_Cate_ID: 1,
-          Sub_Cate_Name: 'Bullion Coins',
-          Sub_Cate_Image: 'images/subcategories/img2.jpg'
-        }, {
-          Sub_Cate_ID: 1,
-          Sub_Cate_Name: 'Bullion Coins',
-          Sub_Cate_Image: 'images/subcategories/buiscut.jpg'
-        }, {
-          Sub_Cate_ID: 1,
-          Sub_Cate_Name: 'Bullion Coins',
-          Sub_Cate_Image: 'images/subcategories/bullion.png'
-        }, {
-          Sub_Cate_ID: 1,
-          Sub_Cate_Name: 'Bullion Coins',
-          Sub_Cate_Image: 'images/subcategories/img2.jpg'
+          Sub_Cate_Image: 'images/subcategories/buiscut.jpg',
         },
-      ]
-    }
+        {
+          Sub_Cate_ID: 1,
+          Sub_Cate_Name: 'Bullion Coins',
+          Sub_Cate_Image: 'images/subcategories/bullion.png',
+        },
+        {
+          Sub_Cate_ID: 1,
+          Sub_Cate_Name: 'Bullion Coins',
+          Sub_Cate_Image: 'images/subcategories/img2.jpg',
+        },
+        {
+          Sub_Cate_ID: 1,
+          Sub_Cate_Name: 'Bullion Coins',
+          Sub_Cate_Image: 'images/subcategories/buiscut.jpg',
+        },
+        {
+          Sub_Cate_ID: 1,
+          Sub_Cate_Name: 'Bullion Coins',
+          Sub_Cate_Image: 'images/subcategories/bullion.png',
+        },
+        {
+          Sub_Cate_ID: 1,
+          Sub_Cate_Name: 'Bullion Coins',
+          Sub_Cate_Image: 'images/subcategories/img2.jpg',
+        },
+      ],
+    };
     return this.apiRequest.get('api/category/GetFeaturedCategory');
   }
 }
