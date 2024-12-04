@@ -14,7 +14,6 @@ import { SearchService } from '../../../Services/search.service';
   selector: 'app-navbar',
   standalone: true,
   imports: [
-    MnDropdownComponent,
     CommonModule,
     LoginComponent,
     RegisterComponent,
