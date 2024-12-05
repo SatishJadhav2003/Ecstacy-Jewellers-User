@@ -1,66 +1,11 @@
-<!-- <div class="w-screen h-screen overflow-hidden relative">
-    <div
-      class="absolute flex w-[300%] h-full "
-    >
-      <div  [className]="'w-screen h-screen flex items-center justify-center bg-'+currentSlide()+'-500'">
-        <h1 class="text-white text-5xl">Slide 1</h1>
-      </div>
-    </div>
-  </div>
-   -->
 
-<!-- <div class="w-screen h-screen overflow-hidden relative">
-  <div class="absolute flex w-full h-full">
-    <div class="w-screen h-screen flex items-center justify-center">
-      <img class="w-screen h-screen" [src]="getImage()" alt="" />
-    </div>
-  </div>
-</div> -->
-<!-- <div class="relative bg-cover bg-center h-screen text-white" style="background-image: url('images/slides/ring.jpeg');">
-
-  <div class="absolute inset-0 bg-black bg-opacity-50"></div>
-
-  <div class="relative z-10 flex flex-col items-center justify-center h-full text-center">
-    <h1 class="text-3xl md:text-5xl font-bold mb-4">
-      CELEBRATING REAL BRIDES ACROSS INDIA
-    </h1>
-    <p class="text-lg md:text-2xl mb-8">WEDDING JEWELRY COLLECTION</p>
-    
-    <button class="bg-gold-600 text-white px-6 py-3 rounded-full hover:bg-gold-700 transition duration-300">
-      EXPLORE MORE
-    </button>
-  </div>
-</div> -->
 <div class="wrapper">
   <owl-carousel-o [options]="customOptions">
-    <!-- @for (item of banner; track $index) {
 
-    <div
-      class="relative bg-cover bg-center h-screen text-white"
-      style="background-image: url('images/slides/ring.jpeg')"
-    >
-      <div class="absolute inset-0 bg-black bg-opacity-50"></div>
-
-      <div
-        class="relative z-10 flex flex-col items-center justify-center h-full text-center"
-      >
-        <h1 class="text-3xl md:text-5xl font-bold mb-4">
-          CELEBRATING REAL BRIDES ACROSS INDIA
-        </h1>
-        <p class="text-lg md:text-2xl mb-8">WEDDING JEWELRY COLLECTION</p>
-
-        <button
-          class="bg-gold-600 text-white px-6 py-3 rounded-full hover:bg-gold-700 transition duration-300"
-        >
-          EXPLORE MORE
-        </button>
-      </div>
-    </div>
-    } -->
     <ng-container *ngFor="let slide of banner">
       <ng-template class="slide" carouselSlide>
         <img
-        class="w-screen h-screen"
+        class="w-screen  sm:h-96"
           [src]="slide.Banner_Image"
           [alt]="slide.Banner_Name"
           [title]="slide.Banner_Name"
