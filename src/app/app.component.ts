@@ -16,11 +16,13 @@ export class AppComponent {
 
   readonly productService = inject(ProductService);
   ngOnInit() {
-    this.productService.getUserCartItems().subscribe((data) => {
-      localStorage.setItem('CartItems', JSON.stringify(data));
-    });
-    this.productService.getUserWishlistItems().subscribe((data) => {
-      localStorage.setItem('WishlistItems', JSON.stringify(data));
-    });
+    if (localStorage.getItem('User_ID')) {
+      this.productService.getUserCartItems().subscribe((data) => {
+        localStorage.setItem('CartItems', JSON.stringify(data));
+      });
+      this.productService.getUserWishlistItems().subscribe((data) => {
+        localStorage.setItem('WishlistItems', JSON.stringify(data));
+      });
+    }
   }
 }

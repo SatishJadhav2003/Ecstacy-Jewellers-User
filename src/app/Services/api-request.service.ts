@@ -12,7 +12,6 @@ import { UtilService } from './util.service';
   providedIn: 'root',
 })
 export class ApiRequestService {
-  util = inject(UtilService);
 
   // Base URL for the API
   public baseUrl = apiUrl;
@@ -31,7 +30,7 @@ export class ApiRequestService {
     return localStorage.getItem('authToken'); // Adjust according to your token storage mechanism
   }
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient,private util:UtilService) {}
 
   // GET Request
   get<T>(endpoint: string, params?: any): Observable<T> {
@@ -78,15 +77,11 @@ export class ApiRequestService {
   private handleError(error: HttpErrorResponse) {
     let errorMessage = 'An unknown error occurred!';
     if (error.error instanceof ErrorEvent) {
-      // Client-side or network error
       errorMessage = `Error: ${error.error.message}`;
-      this.util.error(errorMessage);
     } else {
-      // Backend error
       errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
-      this.util.error(errorMessage);
-
     }
+    this.util.error(errorMessage); // UtilService should work here
     return throwError(errorMessage);
   }
 }

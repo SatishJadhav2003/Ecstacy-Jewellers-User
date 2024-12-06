@@ -34,17 +34,26 @@ export class LoginComponent {
   }
 
   onSubmit() {
-    if (this.signupForm.valid) {
-      console.log(this.signupForm.value);
-      // this.authService.saveCustomer(this.signupForm.value).subscribe((data) => {
-      //   console.log(data);
-      // })
-    }
     this.isOTP = true;
     setTimeout(() => {
       this.focusNext('#one');
     }, 500);
   }
+
+  onVerify() {
+    this.authService
+      .loginByPhone(this.signupForm.get('Cust_Mobile').value)
+      .subscribe((res) => {
+        console.log(res);
+        if (res.length > 0) {
+          localStorage.setItem('User', JSON.stringify(res[0]));
+          localStorage.setItem('User_ID', JSON.stringify(res[0].User_ID));
+          this.authService.IsLoggedIn.set(true);
+          this.authService.LoginModalOpen.set(false);
+          this.authService.RegistrationModalOpen.set(false);
+        }
+      });
+  } 
 
   getClass(name: string) {
     if (

@@ -8,10 +8,9 @@
     class="bg-white rounded-lg shadow-lg w-full max-w-4xl flex flex-col md:flex-row"
   >
     <!-- Left Section: Image -->
-    <div
-      class="hidden md:flex md:w-2/3 bg-cover bg-center rounded-l-lg"
-      
-    ><img class="object-contain p-8" src="icons/logogold1.png" alt=""></div>
+    <div class="hidden md:flex md:w-2/3 bg-cover bg-center rounded-l-lg">
+      <img class="object-contain p-8" src="icons/logogold1.png" alt="" />
+    </div>
 
     <!-- Right Section: Form with Grayish Background Image -->
     <div
@@ -44,7 +43,7 @@
             </svg>
           </button>
         </div>
-        @if (!isOTP) {
+        @if (!isOTP && !isPassword) {
         <!-- Modal Body -->
         <p class="text-white mb-4">
           Please enter the following details to create your account
@@ -53,7 +52,7 @@
         <!-- Form Fields -->
         <form
           [formGroup]="signupForm"
-          (ngSubmit)="onSubmit()"
+          (ngSubmit)="sendOTP()"
           class="space-y-4"
         >
           <input
@@ -89,7 +88,7 @@
           <button
             type="submit"
             class="w-full bg-yellow-600 text-white text-lg font-semibold py-3 rounded-lg hover:cursor-pointer"
-            (click)="onSubmit()"
+           
           >
             <!-- [disabled]="signupForm.invalid" -->
             CREATE ACCOUNT
@@ -106,7 +105,8 @@
             <img src="icons/google.png" alt="Google" class="w-6 h-6" />
           </a>
         </div>
-        } @if (isOTP) {
+        }
+         @if (isOTP) {
         <div class="relative z-10">
           <p class="text-sm text-white mb-6">
             A verification code is sent to your mobile number. Please enter it
@@ -122,6 +122,8 @@
             </div>
             <div class="relative w-full mb-4">
               <input
+                [ngModelOptions]="{ standalone: true }"
+                [(ngModel)]="mobile"
                 disabled
                 type="text"
                 placeholder="Mobile No."
@@ -208,6 +210,7 @@
             <!-- Verify Button -->
             <div>
               <button
+              (click)="onVerify()"
                 type="button"
                 class="w-full py-3 rounded-lg bg-yellow-500 text-white font-semibold hover:bg-yellow-600 transition duration-300"
               >
@@ -218,6 +221,59 @@
           <!-- Social Sign-in Options -->
         </div>
         }
+        @if (isPassword) {
+          <div class="relative z-10">
+            <p class="text-sm text-white mb-6">
+              Let's secure your account
+            </p>
+  
+            <form>
+              <!-- password Input -->
+              <div class="flex justify-start mb-2">
+                <a href="#" class="text-sm text-white font-bold justify-start"
+                  >Create Password</a
+                >
+              </div>
+              <div class="relative w-full mb-4">
+                <input
+                id="createpassword"
+                  [ngModelOptions]="{ standalone: true }"
+                  [(ngModel)]="createPassword"
+                  type="password"
+                  placeholder="Create Password."
+                  class="w-full p-3 rounded-lg bg-gray-200 text-dark placeholder-gray-400 pr-16"
+                />
+              </div>
+              <div class="flex justify-start mb-2">
+                <a href="#" class="text-sm text-white font-bold justify-start"
+                  >Confirm Password</a
+                >
+              </div>
+              <div class="relative w-full mb-4">
+                <input
+                  [ngModelOptions]="{ standalone: true }"
+                  [(ngModel)]="confirmPassword"
+                  type="password"
+                  placeholder="Create Password."
+                  class="w-full p-3 rounded-lg bg-gray-200 text-dark placeholder-gray-400 pr-16"
+                />
+              </div>
+
+  
+              <!-- Verify Button -->
+              <div>
+                <button
+                (click)="onSubmit()"
+                  type="button"
+                  class="w-full py-3 rounded-lg bg-yellow-500 text-white font-semibold hover:bg-yellow-600 transition duration-300"
+                >
+                  Submit
+                </button>
+              </div>
+            </form>
+            <!-- Social Sign-in Options -->
+          </div>
+          }
         <div
           class="flex flex-wrap items-center justify-center mt-4 border-t pt-3 hover:cursor-pointer"
           (click)="onLogin()"

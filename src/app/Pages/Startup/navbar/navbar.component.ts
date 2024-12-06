@@ -84,8 +84,11 @@ export class NavbarComponent {
   // *************************************************Product section end********************************************************//
   // *************************************************Account section Start********************************************************//
   onAccount() {
-    if (this.auth.IsLoggedIn()) {
+    if (this.auth.loggedIn()) {
+      this.navigateTo('user/profile')
     } else {
+      this.auth.LoginModalOpen.set(true);
+    this.auth.RegistrationModalOpen.set(false);
     }
   }
   // *************************************************Other section end********************************************************//
@@ -93,8 +96,7 @@ export class NavbarComponent {
   ngOnDestoy() {}
 
   openModal() {
-    this.auth.LoginModalOpen.set(true);
-    this.auth.RegistrationModalOpen.set(false);
+    
   }
 
   navigateTo(path) {
@@ -112,5 +114,10 @@ export class NavbarComponent {
     console.log(this.route.snapshot.params);
 
     this.router.navigate(['/filter'], { relativeTo: this.route });
+  }
+
+  logOut()
+  {
+    this.auth.logOut();
   }
 }

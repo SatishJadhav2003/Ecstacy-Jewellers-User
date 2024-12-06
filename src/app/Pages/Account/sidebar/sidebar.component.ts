@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
+import { AuthService } from '../../../Authentication/auth.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -13,7 +14,7 @@ import { filter } from 'rxjs';
 export class SidebarComponent {
   currentRoute: string = '';
 
-  constructor(private route: ActivatedRoute, private router: Router) {}
+  constructor(private route: ActivatedRoute, private router: Router,private auth :AuthService) {}
 
   ngOnInit() {
     // Update currentRoute whenever navigation ends or page loads
@@ -30,6 +31,12 @@ export class SidebarComponent {
   }
 
   navigateTo(path: string) {
+    if(path=="logout")
+    {
+      this.auth.logOut();
+      this.navigateTo('');
+      return;
+    }
     this.router.navigate([path], { relativeTo: this.route });
   }
 
