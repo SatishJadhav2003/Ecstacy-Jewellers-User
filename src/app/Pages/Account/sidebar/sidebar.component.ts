@@ -13,6 +13,11 @@ import { AuthService } from '../../../Authentication/auth.service';
 })
 export class SidebarComponent {
   currentRoute: string = '';
+  isSidebarOpen = false;
+
+  toggleSidebar() {
+    this.isSidebarOpen = !this.isSidebarOpen;
+  }
 
   constructor(private route: ActivatedRoute, private router: Router,private auth :AuthService) {}
 
@@ -31,6 +36,7 @@ export class SidebarComponent {
   }
 
   navigateTo(path: string) {
+    this.isSidebarOpen = !this.isSidebarOpen
     if(path=="logout")
     {
       this.auth.logOut();

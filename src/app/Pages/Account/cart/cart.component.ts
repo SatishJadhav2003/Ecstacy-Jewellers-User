@@ -136,6 +136,7 @@ export class CartComponent {
           Product_Name: this.productsList[index].Product_Name,
           Description: this.productsList[index].Description,
           Product_Image: this.productsList[index].Product_Image,
+          Rating: 0
         };
         this.watchList.push(newItem);
 

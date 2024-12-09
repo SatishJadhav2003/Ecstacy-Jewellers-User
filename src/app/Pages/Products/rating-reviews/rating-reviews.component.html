@@ -1,27 +1,27 @@
 <div class="bg-white rounded-lg w-full mx-auto overflow-y-auto">
-  <h2 class="text-xl font-bold text-yellow-800 flex justify-between mb-4 p-4">
+  <h2 class="text-md md:text-xl font-bold text-yellow-800 flex justify-between pt-3 mb-2 md:mb-4 md:p-4">
     Ratings & Reviews
   </h2>
 
   @if (canRateProduct) {
-  <div id="starRating" class="flex space-x-2 mb-4 p-4 justify-evenly">
+  <div id="starRating" class="flex space-x-2 mb-4 md:p-4 justify-evenly">
     @for ( star of [1, 2, 3, 4, 5]; track $index) {
     <button
       class="text-gray-400 hover:text-yellow-400 flex flex-col items-center"
       [ngClass]="{ 'text-yellow-400': $index < rating }"
       (click)="setRating($index + 1)"
     >
-      <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+      <svg class="w-5 h-5 md:w-8 md:h-8" fill="currentColor" viewBox="0 0 24 24">
         <path
           d="M12 .587l3.668 7.568L24 9.748l-6 5.857 1.415 8.284L12 18.401l-7.415 4.488L6 15.605 0 9.748l8.332-1.593L12 .587z"
         />
       </svg>
-      <span>{{ ratingLabels[$index] }}</span></button
+      <span class="text-xs sm:text-sm" >{{ ratingLabels[$index] }}</span></button
     >}
   </div>
 
   <!-- Review Message -->
-  <div class="p-4">
+  <div class="md:p-4">
     <textarea
       class="w-full border rounded-lg focus:ring-2 focus:ring-gold-400 p-4"
       rows="4"
@@ -31,7 +31,7 @@
   </div>
 
   <!-- Photo Upload -->
-  <div class="p-4">
+  <div class="md:p-4">
     <label class="block text-gray-700 font-medium mb-2" for="uploadPhotos">
       Upload Photos (optional):
     </label>
@@ -40,15 +40,15 @@
       id="uploadPhotos"
       accept="image/*"
       multiple
-      class="block w-full text-gray-600 border border-gray-300 rounded-lg p-2 cursor-pointer focus:outline-none focus:ring-2 focus:ring-gold-400"
+      class="block w-full text-gray-600 border border-gray-300 rounded-lg p-1 md:p-2 cursor-pointer focus:outline-none focus:ring-2 focus:ring-gold-400"
       (change)="onFileSelected($event)"
     />
   </div>
 
   <!-- Submit Button -->
-  <div class="p-4">
+  <div class="py-3 md:p-4">
     <button
-      class="w-full bg-gold-500 text-white p-3 rounded-lg hover:bg-gold-600"
+      class="w-full bg-gold-500 text-white p-2 md:p-3 rounded-lg hover:bg-gold-600"
       (click)="submitReview()"
     >
       Submit Review
@@ -59,7 +59,7 @@
 </div>
 
 @if (ratingReviewList?.length >0) {
-<div
+<!-- <div
   class="w-full flex flex-row space-x-2 mb-4 p-4 border-b-2 border-solid border-[#f0f0f0]"
 >
   @for (img of imagesList; track $index) {
@@ -71,9 +71,9 @@
     loading="lazy"
     (click)="viewImages(-1,$index)"
   />}
-</div>
+</div> -->
 @for (item of ratingReviewList; track $index;let i=$index) {
-<div class="border-b-2 border-solid border-[#f0f0f0] p-4">
+<div class="border-b-2 border-solid border-[#f0f0f0] md:p-4">
   <h3 class="flex flex-row font-medium">
     <div class="flex items-center text-xs">
       <span

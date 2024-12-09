@@ -14,4 +14,5 @@ export class WatchlistOutput
   Product_Name: string;
   Description: string;
   Product_Image:string;
+  Rating:number;
 }

@@ -36,61 +36,26 @@
     <p class="text-red-500 text-lg font-bold text-center">
       {{ productData.Price | currency : "INR" : "symbol-narrow" }}
     </p>
-
-    <div class="flex justify-center mt-2 mb-4">
-      <div class="flex space-x-1 text-yellow-400">
-        <!-- Star Ratings -->
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          class="h-5 w-5"
-          fill="currentColor"
-          viewBox="0 0 20 20"
-        >
-          <path
-            d="M10 15l-5.878 3.09L5.66 11.59.947 7.409 7.682 6.59 10 1l2.318 5.59 6.735.818-4.713 4.182 1.538 6.5L10 15z"
-          />
-        </svg>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          class="h-5 w-5"
-          fill="currentColor"
-          viewBox="0 0 20 20"
-        >
-          <path
-            d="M10 15l-5.878 3.09L5.66 11.59.947 7.409 7.682 6.59 10 1l2.318 5.59 6.735.818-4.713 4.182 1.538 6.5L10 15z"
-          />
-        </svg>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          class="h-5 w-5"
-          fill="currentColor"
-          viewBox="0 0 20 20"
-        >
-          <path
-            d="M10 15l-5.878 3.09L5.66 11.59.947 7.409 7.682 6.59 10 1l2.318 5.59 6.735.818-4.713 4.182 1.538 6.5L10 15z"
-          />
-        </svg>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          class="h-5 w-5"
-          fill="currentColor"
-          viewBox="0 0 20 20"
-        >
-          <path
-            d="M10 15l-5.878 3.09L5.66 11.59.947 7.409 7.682 6.59 10 1l2.318 5.59 6.735.818-4.713 4.182 1.538 6.5L10 15z"
-          />
-        </svg>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          class="h-5 w-5 text-gray-400"
-          fill="currentColor"
-          viewBox="0 0 20 20"
-        >
-          <path
-            d="M10 15l-5.878 3.09L5.66 11.59.947 7.409 7.682 6.59 10 1l2.318 5.59 6.735.818-4.713 4.182 1.538 6.5L10 15z"
-          />
-        </svg>
+    @if (productData.Rating) {
+      <div class="flex justify-center mt-2 mb-4">
+        <div class="flex space-x-1">
+          <!-- Dynamic Star Ratings -->
+          <ng-container *ngFor="let star of [1, 2, 3, 4, 5]; let i = index">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-5 w-5"
+              [ngClass]="i < productData.Rating ? 'text-yellow-400' : 'text-gray-400'"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+            >
+              <path
+                d="M10 15l-5.878 3.09L5.66 11.59.947 7.409 7.682 6.59 10 1l2.318 5.59 6.735.818-4.713 4.182 1.538 6.5L10 15z"
+              />
+            </svg>
+          </ng-container>
+        </div>
       </div>
-    </div>
+      
+    }
   </div>
 </div>

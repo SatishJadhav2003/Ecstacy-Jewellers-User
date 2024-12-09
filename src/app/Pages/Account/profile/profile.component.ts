@@ -104,7 +104,7 @@ export class ProfileComponent {
 
   getUserInfo() {
     this.accountService.getUserInfo().subscribe((res) => {
-      debugger;
+      
       if (res.length > 0) {
         this.userInfoForm.patchValue({
           firstname: res[0].First_Name.trim(),

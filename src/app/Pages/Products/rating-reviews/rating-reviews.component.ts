@@ -116,6 +116,7 @@ export class RatingReviewsComponent {
         this.util.success('Review Added Successfully');
         this.resetForm();
         this.files = [];
+        this.getRatings();
       },
       error: (error) => {
         console.error('Error submitting review:', error);

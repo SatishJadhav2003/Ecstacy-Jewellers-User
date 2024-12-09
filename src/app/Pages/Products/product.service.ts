@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { ApiRequestService } from '../../Services/api-request.service';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { Product } from '../../Shared/Models/product.model';
 import { Product_Images } from '../../Shared/Models/ProductImages';
 import { Cart, CartOutput } from '../../Shared/Models/Cart';
@@ -95,9 +95,15 @@ export class ProductService {
   // Rating & reviews
   canRate(Product_ID: number): Observable<boolean> {
     const User_ID = parseInt(localStorage.getItem('User_ID'));
-    return this.apiService.get(
-      'api/RatingReview/CanUserRateProduct/' + User_ID + '/' + Product_ID
-    );
+    if (User_ID) {
+      return this.apiService.get(
+        'api/RatingReview/CanUserRateProduct/' + User_ID + '/' + Product_ID
+      );
+    }
+    else
+    {
+      return of(false);
+    }
   }
 
   getProducReviews(Product_ID: number): Observable<any[]> {
