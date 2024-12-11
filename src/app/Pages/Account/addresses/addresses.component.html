@@ -20,8 +20,8 @@
   Add Address
 </button>
 @for (item of addressList; track $index) {
-<div class="bg-white rounded-lg shadow p-4 items-center space-x-4 flex mt-4">
-  <div>
+<div class="bg-white rounded-lg shadow p-4 items-center space-x-4 flex flex-wrap mt-4">
+  <div class="md:w-auto w-full" >
     <span
       class="text-xs font-semibold inline-block py-1 px-2 rounded-full uppercase last:mr-0 mr-1"
       [ngClass]="

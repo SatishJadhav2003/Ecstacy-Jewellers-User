@@ -100,6 +100,7 @@ export class NavbarComponent {
   }
 
   navigateTo(path) {
+    this.isMenuOpen =false;
     this.router.navigate([path]);
   }
   onSearch() {

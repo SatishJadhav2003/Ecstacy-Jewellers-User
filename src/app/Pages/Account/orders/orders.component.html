@@ -1,16 +1,17 @@
 <div class="w-full flex flex-wrap">
-  <div class="w-full md:w-1/2 px-4 overflow-y-auto h-full ">
+  <!-- Left Column -->
+  <div class="w-full md:w-1/2 px-2 md:px-4 overflow-y-auto h-full">
+    <!-- Current Orders Section -->
     <div class="text-gold-600 font-bold text-lg">
       Current Orders ({{ pendingOrderList.length }})
     </div>
-
     @for (item of pendingOrderList; track $index) {
     <div
       (click)="getOrderDescription(item.Order_Item_ID)"
-      class="bg-white rounded-xl shadow-lg p-6 w-full hover:cursor-pointer mt-4"
       [ngClass]="
-        isCurrentOrder(item.Order_ID) ? 'border-2 border-gold-400' : ''
+        isCurrentOrder(item.Order_Item_ID) ? 'border-2 border-gold-400' : ''
       "
+      class="bg-white rounded-xl shadow-lg p-6 w-full hover:cursor-pointer mt-4"
     >
       <div class="flex flex-col sm:flex-row justify-between items-center">
         <!-- Image Section -->
@@ -173,162 +174,26 @@
     </div>
     }
   </div>
-  <div class="w-full md:w-1/2 sticky top-14 h-full overflow-y-auto">
-    @if (orderDescription?.length >0) {
-    <div class="rounded-xl shadow-lg p-6">
-      <div class="flex justify-between hover:cursor-pointer">
-        <!-- Image -->
-        <img
-          class="w-28 h-28 object-cover rounded-lg"
-          [src]="orderDescription[0].Product_Image"
-          [alt]="orderDescription[0].Product_Name"
-        />
-
-        <!-- Product Details -->
-        <div class="ml-4">
-          <h2 class="text-lg font-bold text-gray-800">
-            {{ orderDescription[0].Product_Name }}
-          </h2>
-          <p class="text-sm text-gray-500 mb-2">
-            {{ orderDescription[0].Description }}
-          </p>
-          <p class="text-xl font-semibold text-red-600">
-            {{ orderDescription[0].Unit_Price | currency : "INR" }}
-          </p>
-          <!-- <p class="text-sm text-gray-500">Gold Purity: 22 Karat</p> -->
-        </div>
-      </div>
-      <div class="flex mt-5 pl-7">
-        <!-- Progress container -->
-        <div class="relative flex flex-col items-center">
-          <!-- Line container -->
-          @if (getDateTime('Delivered')) {
-          <div
-            class="absolute  w-1"
-            [ngClass]="getClass('Delivered')"
-          ></div>
-          } @if (getDateTime('Delivered')) {
-          <div
-            class="absolute h-[435px] w-1"
-            [ngClass]="getClass('Out For Delivery')"
-          ></div>
-          } @if (getDateTime('Out For Delivery')) {
-          <div
-            class="absolute h-[290px] w-1"
-            [ngClass]="getClass('Shipped')"
-          ></div>
-          } @if (getDateTime('Shipped')) {
-
-          <div
-            class="absolute h-[145px] w-1"
-            [ngClass]="getClass('Placed')"
-          ></div>
-          }
-          <!-- Status circles -->
-          @if (getDateTime('Placed')) {
-
-          <div
-            [ngClass]="getStageDot('Placed')"
-            class="relative z-2 mb-[7.3rem] w-6 h-6 rounded-full flex items-center justify-center text-white"
-          ></div>
-          } @if (getDateTime('Shipped')) {
-          <div
-            [ngClass]="getStageDot('Shipped')"
-            class="relative z-2 mb-[7.3rem] w-6 h-6 rounded-full flex items-center justify-center text-white"
-          ></div>
-          } @if (getDateTime('Out For Delivery')) {
-          <div
-            [ngClass]="getStageDot('Out For Delivery')"
-            class="relative z-2 mb-[7.3rem] w-6 h-6 rounded-full flex items-center justify-center text-white"
-          ></div>
-          } @if (getDateTime('Delivered')) {
-          <div
-            [ngClass]="getStageDot('Delivered')"
-            class="relative z-2 mb-0 w-6 h-6 rounded-full flex items-center justify-center text-white"
-          ></div>
-          }
-        </div>
-
-        <!-- Status text -->
-
-        <div class="ml-4 flex flex-col">
-          @if (getDateTime('Placed')) {
-          <!-- Order Confirmed -->
-          <div class="flex items-center mb-14">
-            <div>
-              <div class="text-gold-600 font-bold">Order Confirmed</div>
-              <div class="text-gray-500 text-sm">
-                {{ getDateTime("Placed") | date : "dd-MMM-yy hh:mm:ss a" }}
-              </div>
-              <!-- <div class="text-gray-500 text-sm">12:04 pm</div> -->
-              <div class="text-gray-500 text-sm">
-                Your Order has been placed.
-              </div>
-              <div class="text-gray-500 text-sm font-bold">
-                {{ getLocation("Placed") ? getLocation("Placed") : "Shop" }}
-              </div>
-            </div>
-          </div>
-          }
-          <!-- Shipped -->
-          @if (getDateTime('Shipped')) {
-
-          <div class="flex items-center mb-14">
-            <div>
-              <div class="text-gold-600 font-bold">Shipped</div>
-              <div class="text-gray-500 text-sm">
-                {{ getDateTime("Shipped") | date : "dd-MMM-yy hh:mm:ss a" }}
-              </div>
-
-              <div class="text-gray-500 text-sm">
-                Seller has processed your order.
-              </div>
-              <div class="text-gray-500 text-sm font-bold">
-                {{ getLocation("Shipped") }}
-              </div>
-            </div>
-          </div>
-          }
-          <!-- Out For Delivery -->
-          @if (getDateTime('Out For Delivery')) {
-
-          <div class="flex items-center mb-14">
-            <div>
-              <div class="text-gold-600 font-bold">Out For Delivery</div>
-              <div class="text-gray-500 text-sm">
-                {{
-                  getDateTime("Out For Delivery")
-                    | date : "dd-MMM-yy hh:mm:ss a"
-                }}
-              </div>
-              <div class="text-gray-500 text-sm">
-                Item has been dispatched from the seller warehouse
-              </div>
-              <div class="text-gray-500 text-sm font-bold">
-                {{ getLocation("Out For Delivery") }}
-              </div>
-            </div>
-          </div>
-          }
-
-          <!-- Will be Delivered -->
-          @if (getDateTime('Delivered')) {
-          <div class="flex items-center">
-            <div>
-              <div class="text-gold-600 font-bold">Delivered</div>
-              <div class="text-gray-500 text-sm">
-                {{ getDateTime("Delivered") | date : "dd-MMM-yy hh:mm:ss a" }}
-              </div>
-
-              <div class="text-gray-500 text-sm font-bold">
-                {{ getLocation("Delivered") }}
-              </div>
-            </div>
-          </div>
-          }
-        </div>
-      </div>
-    </div>
-    }
+  <div
+    class="w-full md:w-1/2 sticky top-14 h-full overflow-y-auto hidden md:block"
+  >
+    <app-order-desc [Order_Item_ID]="selectedOrder_Item_ID"></app-order-desc>
   </div>
+  @if (isPopupVisible) {
+  <div
+    class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+  >
+    <div
+      class="bg-white rounded-lg shadow-lg w-11/12 max-w-lg h-5/6 overflow-y-auto"
+    >
+      <button
+        class="text-red-500 font-bold p-4 hover:text-red-700 float-right"
+        (click)="closePopup()"
+      >
+        Close
+      </button>
+      <app-order-desc [Order_Item_ID]="selectedOrder_Item_ID"></app-order-desc>
+    </div>
+  </div>
+  }
 </div>
